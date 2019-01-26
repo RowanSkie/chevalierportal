@@ -1,36 +1,60 @@
+body{
+   style="margin: 0;"
+}
+
 .app{
   width: 100%;
   height: 100%;
 }
 
-.row-of-three{
+.title{
+  background-image: url("pic/title.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   width: 100%;
-}
-.item{
-  /* lets make the itme 33.33% wide so 3 equals 100% */
-  width: 33.33%;
-  /* float left means they'll align beside eachother instead of below eachother! */
-  float: left;
-}
-
-/* lets style the img tag that is inside our item div*/
-.item img{
-  width: 100%;
-  /* since the heights vary, lets give it a fixed height */
-  height: 200px;
-  /* lets 'cover' the image so it doesn't stretch */
+  height: 100px;
   object-fit: cover;
 }
 
-/* Now lets add our buttonStyle class! */
-.buttonStyle{
+.main{
+  width: 100%;
+}
+.item33{
+  width: 33.3%;
+  float: left;
+}
+.item20{
+  width: 20%;
+  float: left;
+}
+
+.item img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.buttonRed{
   width: 100%;
   height: 50px;
   display: block;
   border-radius: 3px;
-  background: #2196F3;
-  /* text color */
+  background: #c32f2d;
   color: white;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+}
+
+.buttonLightGray{
+  width: 90%;
+  height: 10px;
+  display: block;
+  border-radius: 3px;
+  background: #e5e5e5;
+  /* text color */
+  color: black;
   text-align: center;
   /* setting out line-height to our height makes the text float in the center! */
   line-height: 50px;
