@@ -3,6 +3,16 @@ Chevalier School Student Portal
 
 ### About
 
-This repository holds Mark Joshua Zuniga's Capstone Project: A Student Portal. Unless you are a developer, you aren't allowed to edit this.
+This repository holds Chevalier School Capstone Project: IT Group 2's Prototype.
+
+Members:
+
+Mark Joshua T. Zuniga (RowanSkie)
+
+Deidrey Simon Paul M. Mandani
+
+Joshua Edwin Cruz
+
+Migel Sanchez
 
 The main site can be checked by downloading and opening the index.html.
