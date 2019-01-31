@@ -9,7 +9,7 @@ Members:
 
 Mark Joshua T. Zuniga (RowanSkie)
 
-Deidrey Simon Paul M. Mandani
+Deidrey Simon Paul L. Mandani
 
 Joshua Edwin Cruz
 

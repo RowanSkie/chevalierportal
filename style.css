@@ -35,15 +35,24 @@ body{
   object-fit: cover;
 }
 
-.buttonRed{
+input[type=text], input[type=password] {
   width: 100%;
-  height: 50px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.buttonRed{
+  width: 70%;
+  height: 30px;
   display: block;
   border-radius: 3px;
   background: #c32f2d;
   color: white;
   text-align: center;
-  line-height: 50px;
+  line-height: 30px;
   text-decoration: none;
 }
 
@@ -53,12 +62,9 @@ body{
   display: block;
   border-radius: 3px;
   background: #e5e5e5;
-  /* text color */
   color: black;
   text-align: center;
-  /* setting out line-height to our height makes the text float in the center! */
-  line-height: 50px;
-  /* we don't want that ugly underline */
+  line-height: 5px;
   text-decoration: none;
 }
 
