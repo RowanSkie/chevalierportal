@@ -1,5 +1,10 @@
 body{
-   style="margin: 0;"
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0;
+  color: black;
 }
 
 .app{
@@ -27,6 +32,20 @@ body{
 .item20{
   width: 20%;
   float: left;
+}
+
+.bannerleft{
+  width: 20%;
+  height: 100%;
+  float: left;
+  background: #ffbebe;
+}
+
+.bannerright{
+  width: 20%;
+  height: 100%;
+  float: left;
+  background: ff2121;
 }
 
 .item img{
