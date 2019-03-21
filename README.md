@@ -34,7 +34,7 @@ a. Select "Standalone MySQL Server/ Classic MySQL Replication" for the MySQL ser
 
 b. Skip the next step
 
-c. Select "Use Legacy AuthenticatioN Method (Retain MySQL 5.x Compatibility)"
+c. Select "Use Legacy Authentication Method (Retain MySQL 5.x Compatibility)"
 
 d. The password to use is "Group2"
 
