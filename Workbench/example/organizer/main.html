@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>		
+		<script type="text/javascript" src="js/main.js?filever=<?=filesize('js/main.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>	
+		<link rel="stylesheet" type="text/css" href="css/main.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/center.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/menu.css?version=1.0">
+		<title>Organizer</title>
+		<script>
+			var gameType;
+		</script>
+	</head>
+	<body style="font-family:Helvetica;" onload="set_interval();removeParam('mode');removeParam('modeID')" onmousemove="reset_interval()" onclick="reset_interval()" onkeypress="reset_interval()" onscroll="reset_interval()">
+		<ul style="font-family:helvetica;background-color: #333;">
+			<!--li class="icon">
+				<a>&#9776;</a>
+			</li-->			
+			<li class="dropdown"><a>Home</a>
+				<div class="dropdown-content">
+					<a href="index.php" onclick=logout()>Logout</a>
+				</div>
+			</li>
+			<li class="dropdown"><a>Competition</a>
+				<div class="dropdown-content">
+					<a href="competition.html" onclick="loadCompetition()">Create</a>
+				</div>
+			</li>
+			<li class="dropdown"><a>Account</a>
+				<div class="dropdown-content">
+					<a href="account.php" onclick="loadAccount()">Manage</a>
+				</div>
+			</li>
+		</ul>
+
+		<table style="position:relative; margin-left:auto;margin-right:auto;top:50px;">
+			<tr>
+				<td colspan="2" style="text-align:center;">
+					 <img id="loginImage" src="images/gmsytemlogo.jpg" style="width:100px;height:120px;"> 
+				</td>
+			</tr>
+		</table>
+		<h1>WELCOME <script>document.write(getParam("user")+"!");</script></h1>
+		<h2>(Group Code: <script>document.write(getParam("groupcode"));</script>)</h2>
+		<!--table style="position:relative;margin-left:auto;margin-right:auto;top:100px;" border=0>
+			<tr>
+				<td>FILTER BY:</td>
+				<td>
+					<select style="position:relative;font-family:Helvetica;">
+						<option value=0>This year</option>
+						<option value=1>All competitions</option>
+					</select>
+				</td>
+			</tr>
+		</table-->
+		<table id="tblCompetitions" name="tblCompetitions" style="position:relative;margin-left:auto;margin-right:auto;top:50px;" border=1>
+			<tr>
+				<td colspan="6" style="text-align:center;height:50px;font-size:16px;"><b>COMPETITIONS</b></td>
+			</tr>
+			<tr style="color:white;background-color:grey;text-align:center;font-size:16px;height:30px">
+				<th style="width:250px;">TITLE</th>
+				<th style="width:100px;">START DATE</th>
+				<th style="width:100px;">END DATE</th>
+				<th style="width:250px;">COUNTRY</th>
+				<th style="width:250px;">VENUE</th>
+				<th style="width:80px;">MANAGE</th>
+			</tr>
+			<script>
+				var competitions=retrieveCompetitionList();
+				var c;
+				for(var i in competitions){
+					c = competitions[i];
+					if (c.ID==null)
+						break;
+					document.write("<tr style=\"text-align:center;font-size:16px;height:30px\">");
+					document.write("\t\t<td  style=\"text-align:left; height:20px;cursor:pointer\"><a href=\"event.html#schedule\" onclick=\"loadEvent("+c.ID+",2)\">"  +  c.Title + "</a></td>\n");
+					document.write("\t\t<td  style=\"text-align:center;\">" + c.StartDate + "</td>\n");
+					document.write("\t\t<td  style=\"text-align:center;\">" + c.EndDate + "</td>\n");
+					document.write("\t\t<td  style=\"text-align:left;\">" + c.Country + "</td>\n");
+					document.write("\t\t<td  style=\"text-align:left;\">" + c.Venue + "</td>\n");
+					//document.write("\t\t<td> <input type=\"button\" name=\""+ c.ID +"\" href=\"competition.html\" value=\"Manage\" onclick=\"loadCompetition(1,this.name)\"> </td>\n");
+					document.write("\t\t<td> <a class=\"btnManage\"name=\""+ c.ID +"\" href=\"competition.html\" onclick=\"loadCompetition(1,this.name)\">Edit</a></td>\n");
+					document.write("</tr>");
+				}
+			</script>
+		</table><br><br>
+		<table style="position:relative;margin-left:auto;margin-right:auto;top:50px;">
+			<tr>
+				<td>
+					<a class="btn" href="competition.html" onclick="loadCompetition(0,0)" style="width:200px;" >Create</a>
+				</td>
+			</tr>
+		</table>
+		<br><br><br>
+	</body>
+</html>
+

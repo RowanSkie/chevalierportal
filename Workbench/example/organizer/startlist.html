@@ -1,0 +1,1382 @@
+
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/startlist.js?filever=<?=filesize('js/startlist.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/startlist.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/menu.css?version=1.1">
+		<script>
+			var po = getParam("printOfficials");
+			getGameDetails(po);
+		</script>
+	</head>
+	<body style="font-family:Helvetica;">
+		<div id="header" class="header">
+			<div style="position:absolute;left:15px;top:35px">
+				<img id="leftlogo" width=65 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:555px;top:35px">
+				<img id="rightlogo" width=65 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+
+			<h1 style="font-size:10px;">SEPAKTAKRAW</h1><br>
+			<div style="position:absolute;left:125px">
+				<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;width:400px;" border=0>
+					<tr>
+						<td style="text-align:center;">
+							<label style="font-size:10px;"><script>document.write(game.gender+ "'S " +game.event);</script></label>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">
+							<label style="font-size:10px;top:30px;text-align:left;width:200px;left:285px;"><script>document.write(game.phase+ " " +game.matchdesc);</script></label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<label style="position:absolute; left:95px;top:30px;font-size:10px;width:100px;"><script>document.write(game.day);</script></label>
+			<label style="position:absolute; left:95px;top:40px;font-size:10px;width:100px;"><script>document.write(game.date);</script></label>
+			<label style="position:absolute; left:95px;top:50px;font-size:10px;width:100px;"><script>document.write(game.time);</script></label>
+			<label style="position:absolute; left:95px;top:7px;font-size:10px;width:200px;"><script>document.write(game.venue);</script></label>
+			<hr style="position:absolute; top:70px; left:0px; width:650px;">
+		</div>
+		<div id="page1" style="display:none;">
+			<h1 style="top:80px;">START LIST</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[0].officialref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[0].courtref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[0].ref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[0].asstref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[0].lineref1){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[0].lineref2){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:255px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:275px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:295px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<br><br>
+			<div id="team1" style="position:relative;top:80px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							if (player.gameno==1 || player.gameno==255){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status && po=="1"){
+										document.write(ps.description=="-"?" ":ps.description);
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div id="team2" style="position:relative;top:90px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							if (player.gameno==1 || player.gameno==255){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status && po=="1"){
+										document.write(ps.description=="-"?" ":ps.description);
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="page2" style="display:none">
+			<h1 style="top:80px;">START LIST</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[1].officialref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[1].courtref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[1].ref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[1].asstref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[1].lineref1){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[1].lineref2){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:255px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:275px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:295px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<br><br>
+			<div id="team1" style="position:relative;top:80px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							if (player.gameno==2 || player.gameno==255){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status && po=="1"){
+										document.write(ps.description=="-"?" ":ps.description);
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+			<br><br>
+			<div id="team2" style="position:relative;top:90px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							if (player.gameno==2 || player.gameno==255){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status && po=="1"){
+										document.write(ps.description=="-"?" ":ps.description);
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+
+		<div id="page3" style="display:none">
+			<h1 style="top:80px;">START LIST</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[2].officialref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[2].courtref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[2].ref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[2].asstref){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[2].lineref1){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (po=="1"){
+									for(var i in game.referees){
+										ref = game.referees[i];
+										if (ref.id==game.eventofficials[2].lineref2){
+											document.write("(" +ref.noc + ") " + ref.name);
+											break;
+										}
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:255px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:275px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:295px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<br><br>
+			<div id="team1" style="position:relative;top:80px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							if (player.gameno==3 || player.gameno==255){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status && po=="1"){
+										document.write(ps.description=="-"?" ":ps.description);
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+			<br><br>
+			<div id="team2" style="position:relative;top:90px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							if (player.gameno==3 || player.gameno==255){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status && po=="1"){
+										document.write(ps.description=="-"?" ":ps.description);
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
+		<div id="page4" style="display:none">
+			<h1 style="top:80px;">START LIST</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<label style="position:relative;top:0px; left:255px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:275px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:295px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+
+			<div style="position:relative;top:100px;">
+				<table border=1 style="top:0px;left:100px;width=500px;font-size:14px;">
+					<tr>
+						<td colspan="3" style="font-size:16px"><b>REGU 1<b></td>
+					</tr>
+					<tr>
+						<td style="width:150px;">OFFICIAL REFEREE</td>
+						<td style="width:250px;"><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[0].officialref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>COURT REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[0].courtref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[0].ref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>ASST REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[0].asstref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>LINE REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[0].lineref1){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>LINE REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[0].lineref2){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div style="position:relative;top:100px;">
+				<table border=1 style="top:0px;left:100px;width=500px;font-size:14px;">
+					<tr>
+						<td colspan="3" style="font-size:16px"><b>REGU 2<b></td>
+					</tr>
+					<tr>
+						<td style="width:150px;">OFFICIAL REFEREE</td>
+						<td style="width:250px;"><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[1].officialref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>COURT REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[1].courtref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[1].ref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>ASST REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[1].asstref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>LINE REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[1].lineref1){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>LINE REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[1].lineref2){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div style="position:relative;top:100px;">
+				<table border=1 style="top:0px;left:100px;width=500px;font-size:14px;">
+					<tr>
+						<td colspan="3" style="font-size:16px"><b>REGU 3<b></td>
+					</tr>
+					<tr>
+						<td style="width:150px;">OFFICIAL REFEREE</td>
+						<td style="width:250px;"><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[2].officialref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>COURT REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[2].courtref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[2].ref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>ASST REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[2].asstref){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>LINE REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[2].lineref1){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+					<tr>
+						<td>LINE REFEREE</td>
+						<td><script>
+							var name="",noc="";
+							if(po==1)
+							for(var i in game.referees){
+								ref = game.referees[i];
+								if (ref.id==game.eventofficials[2].lineref2){
+									name = ref.name;
+									noc = ref.noc;
+									break;
+								}
+							}
+							document.write(name + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">"+noc );
+						</script></td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+
+		<div id="page5" style="display:none">
+			<h1 style="top:80px;">START LIST</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<label style="position:relative;top:0px; left:255px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:275px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:295px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<br><br>
+			<div style="position:relative;top:80px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							document.write("<tr>");
+							document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+							document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+							document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">");
+							for (var j in game.playerstatus){
+								ps = game.playerstatus[j];
+								if (ps.id == player.status && po=="1"){
+									document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+									break;
+								}
+							}
+							document.write("</td>");
+							document.write("</tr>");
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="page6" style="display:none">
+			<h1 style="top:80px;">START LIST</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<label style="position:relative;top:0px; left:255px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:275px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:295px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<br><br>
+			<div id="team2" style="position:relative;top:80px;">
+				<label style="position:relative;left:48px;width=10px;font-weight:bold;font-size:18px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<br><br>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height m/ft. in</th>
+						<th style="width:60px;word-wrap:break-word;">Weight kg/lbs</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							document.write("<tr>");
+							document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+							document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+							document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">");
+							for (var j in game.playerstatus){
+								ps = game.playerstatus[j];
+								if (ps.id == player.status && po=="1"){
+									document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+									break;
+								}
+							}
+							document.write("</td>");
+							document.write("</tr>");
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br>
+		<div style="position:relative;top:100px;width:550px;">
+			<label style="position:absolute;width:650px;left:48px;top:0px;font-size:10px;">Legend:</label>
+			<label style="position:absolute;width:650px;left:68px;top:10px;font-size:10px;">C  :  Captain</label>
+			<label style="position:absolute;width:650px;left:68px;top:20px;font-size:10px;">R  :  Reserve</label>
+			<label style="position:absolute;width:650px;left:68px;top:30px;font-size:10px;">T  :  Tekong</label>
+			<label style="position:absolute;width:650px;left:68px;top:40px;font-size:10px;">F  :  Feeder</label>
+			<label style="position:absolute;width:650px;left:68px;top:50px;font-size:10px;">S  :  Striker</label>
+			<script>
+				if(game.eventofficials.length>1){
+					document.write("<label style=\"position:absolute;width:650px;left:148px;top:10px;font-size:10px;\">R1 :  REGU 1</label>");
+					document.write("<label style=\"position:absolute;width:650px;left:148px;top:20px;font-size:10px;\">R2 :  REGU 2</label>");
+					document.write("<label style=\"position:absolute;width:650px;left:148px;top:30px;font-size:10px;\">R3 :  REGU 3</label>");
+				}
+			</script>
+		</div>
+		<div class="no-print" style="position:relative;top:100px;width:550px;">
+			<div id="menu" style="position:relative;width:650px;top:80px;">
+				<table id="options" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td>
+							<a id="lnk4" onclick=switchPage("4")>Officials</a>
+						</td>
+						<td>  </td>
+						<td>
+							<a href="#" id="lnk5" onclick=switchPage("5")>Team A</a>
+						</td>
+						<td>  </td>
+						<td>
+							<a href="#" id="lnk6" onclick=switchPage("6")>Team B</a>
+						</td>
+						<!--td>
+							<a href="#" onclick=switchPage("1")>Game 1</a>
+						</td>
+						<td>
+							<a href="#" onclick=switchPage("2")>Game 2</a>
+						</td>
+						<td>
+							<a href="#" onclick=switchPage("3")>Game 3</a>
+						</td-->
+					</tr>
+				</table>
+			</div>
+			<br>
+			<br>
+			<div style="position:relative;width:650px;top:0px;">
+				<hr style="position:relative; top:45px; left:0px; width:650px;">
+				<table style="position:absolute;margin-left:auto;margin-right:auto;top:50px;width:650px;" border=0>
+					<tr>
+						<td style="text-align:center;">
+							<img id="sponsor1logo" width=65 >
+						</td>
+						<td width=100 style="text-align:center;">
+							<label style="max-width:60px;word-wrap: break-word;font-size:12px;left:0px;top:0px;text-align:center;color:gray">STARFISH SYSTEM</label>
+						</td>
+						<td style="text-align:center;">
+							<img id="sponsor2logo" width=65 >
+						</td>
+					</tr>
+				</table>
+
+				<!--div style="position:absolute;left:190px;top:80px">
+					<img id="sponsor1logo" width=150 height=50 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+				</div>
+				<div style="position:absolute;left:400px;top:80px">
+					<img id="sponsor2logo" width=150 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+				</div>
+				<label style="position:absolute;max-width:60px;word-wrap: break-word;font-size:12px;left:300px;top:67px;text-align:center;color:gray">STARFISH SYSTEM</label-->
+				<div style="position:absolute;width:650px;top:120px;">
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+						<tr>
+							<td>
+								<input type="submit" class="btn" value="Print" onclick=printPage()>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<script>
+				if(game.eventofficials.length>1){
+					document.getElementById("page1").style.display = "none";
+					document.getElementById("page2").style.display = "none";
+					document.getElementById("page3").style.display = "none";
+					document.getElementById("page5").style.display = "none";
+					document.getElementById("page6").style.display = "none";
+					document.getElementById("page4").style.display = "block";
+				}else{
+					document.getElementById("page1").style.display = "block";
+					document.getElementById("menu").style.display = "none";
+					document.getElementById("page2").style.display = "none";
+					document.getElementById("page3").style.display = "none";
+					document.getElementById("page5").style.display = "none";
+					document.getElementById("page6").style.display = "none";
+					document.getElementById("page4").style.display = "none";
+				}
+			</script>
+		</div>
+		<div class="footer">
+			<hr style="position:absolute; bottom:80px; left:0px; width:650px;">
+			<table style="position:absolute;margin-left:auto;margin-right:auto;bottom:25px;width:650px;" border=0>
+				<tr>
+					<td style="text-align:center;">
+						<img id="sponsor1logof" width=65 >
+					</td>
+					<td width=100 style="text-align:center;">
+						<label style="max-width:60px;word-wrap: break-word;font-size:12px;left:0px;top:0px;text-align:center;color:gray">STARFISH SYSTEM</label>
+					</td>
+					<td style="text-align:center;">
+						<img id="sponsor2logof" width=65 >
+					</td>
+				</tr>
+			</table>
+			<!--div style="position:absolute;left:0px;bottom:25px;width:250px;height:75px;" border=1>
+				<img id="sponsor1logof" style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:400px;bottom:25px">
+				<img id="sponsor2logof" width=150 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<label style="position:absolute;max-width:60px; word-wrap: break-word;font-size:12px;left:300px;bottom:10px;text-align:center;color:gray">STARFISH SYSTEM</label-->
+		</div>
+		<script>
+			displayLogo();
+		</script>
+	</body>
+</html>

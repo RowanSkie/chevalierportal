@@ -1,0 +1,76 @@
+<head>
+  <title>Chevalier School - Post Announcement</title>
+  <link rel="stylesheet" type="text/css" href="/../css/style.css">
+  <link rel="stylesheet" type="text/css" href="/../css/home.css">
+  <script type="text/javascript" src="/../js/global.js?filever=<?=filesize('/../js/global.js')?>"></script>
+  <script type="text/javascript" src="/../js/announce.js?filever=<?=filesize('/../js/announce.js')?>"></script>
+  <link rel="stylesheet" type="text/css" href="/../css/jquery.ui.timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="/../css/jquery-ui.css">
+  <script src="/../js/jquery.js"></script>
+  <script src="/../js/jquery.ui.timepicker.js"></script>
+  <script src="/../js/jquery-ui.js"></script>
+</head>
+
+<body>
+    <div class="title">
+        <center><img src="/../pic/chevalier_school.png"></center>
+    </div>
+    <div class="main">
+      <div class="bannerleft"><!--- column one for color probably peach --->
+        <center><br><br><br>
+          <a href="teacher.html" class="ButtonRed">Home</a><br>
+          <a href="announce.html" class="ButtonRed">Announcements</a><br>
+          <a href="/../index.html" class="ButtonRed">Log Out</a>
+        </center>
+      </div>
+      <div class="homeapp"><!-- middle column-->
+      <center>
+        <font size=5>Welcome Mr./Ms. <script>document.write(getParam("firstname") + " " +getParam("lastname"));</script></font>
+        <br><br>Post new Announcement:<br><br>
+        <form autocomplete="off" name="formEditAnnounce" onsubmit="return postAnnounce()" textAlign="">
+          <!-- Post Date -->
+
+          <label for="postdate">Post date:</label><br>
+          <input type="date" id="postdate" name="trip-start" min="2018-01-01" max="2035-12-31"><br>
+          (This is the current date.)<br><br>
+
+          <!-- End Date -->
+
+          <label for="enddate">Post Removal Date:</label><br>
+          <input type="date" id="enddate" name="trip-start" min="2018-01-01" max="2035-12-31"><br>
+          (The date will be the date where the post will last appear.)<br><br>
+
+          <!-- Set Default to Date -->
+
+          <script>
+            document.getElementById("postdate").value = new Date().toISOString().slice(0,10);
+            document.getElementById("enddate").value = new Date().toISOString().slice(0,10);
+          </script>
+
+          <!-- Post -->
+          Post:<br>
+          <textarea type="text" name="post" value="post" required style="font-size:20px;" cols=25 rows=5></textarea><br>
+
+          <!-- Importance Form -->
+          <br>Receipients:<br>
+            <input type="radio" name="importance" value="2"> Subject Class<br>
+            <input type="radio" name="importance" value="3"> Advisory Class<br><br>
+
+          <input type="submit" name="btnSave" value="Post Announcement">
+        </form><br>
+          <table id="tblAnnounce" class=Announcement border=3>
+            <tr>
+              <th>Announcements Already Posted</th>
+            </tr>
+          </table>
+      </center>
+      </div>
+      <div class="bannerright"><!--- column five for color probably peach --->
+        <br>
+      </div>
+    </div>
+</body>
+<script>
+   // display the students under the teacher for editing grades
+   getAnnounce();
+</script>

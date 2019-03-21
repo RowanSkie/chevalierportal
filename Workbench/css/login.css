@@ -1,0 +1,52 @@
+body{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0;
+  color: black;
+  font-family:sans-serif;
+  background-image: url("./../../pic/CS.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+}
+
+
+.item{
+  width: 20%;
+  height: auto;
+  float: left;
+}
+
+.loginbox{
+  width: 20%;
+  float: left;
+  background-color: white;
+  border: 1px;
+  border-color:"black";
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button{
+  width: 100px;
+  display: block;
+  border-radius: 3px;
+  background: #c32f2d;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}

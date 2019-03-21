@@ -1,0 +1,3002 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/matchreport.js?filever=<?=filesize('js/matchreport.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<script type="text/javascript" src="js/tabs.js?filever=<?=filesize('js/tabs.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="css/matchreport.css?version=<?=filesize('css/matchreport.css')?>">
+	</head>
+	<body style="font-family:Helvetica;">
+		<script>
+			getGameDetails();
+			getScoreStamp();
+		</script>
+		<div id="header" class="header">
+			<div style="position:absolute;left:15px;top:35px">
+				<img id="leftlogo" width=65 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:555px;top:35px">
+				<img id="rightlogo" width=65 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+
+			<h1 style="font-size:10px;">SEPAKTAKRAW</h1><br>
+			<div style="position:absolute;left:125px">
+				<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;width:400px;" border=0>
+					<tr>
+						<td style="text-align:center;">
+							<label style="font-size:10px;"><script>document.write(game.gender+ "'S " +game.event);</script></label>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">
+							<label style="font-size:10px;top:30px;text-align:left;width:200px;left:285px;"><script>document.write(game.phase+ " " +game.matchdesc);</script></label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<label style="position:absolute; left:95px;top:30px;font-size:10px;width:100px;"><script>document.write(game.day);</script></label>
+			<label style="position:absolute; left:95px;top:40px;font-size:10px;width:100px;"><script>document.write(game.date);</script></label>
+			<label style="position:absolute; left:95px;top:50px;font-size:10px;width:100px;"><script>document.write(game.time);</script></label>
+			<label style="position:absolute; left:95px;top:7px;font-size:10px;width:200px;"><script>document.write(game.venue);</script></label>
+			<hr style="position:absolute; top:70px; left:0px; width:650px;">
+		</div>
+		<div id="page1" style="display:none">
+			<h1 style="top:80px;">MATCH REPORT</h1>
+			<br>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].officialref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].courtref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].ref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].asstref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].lineref1){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].lineref2){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:250px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:270px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:290px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<br>
+			<div id="scoresolo" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:50px;">Team</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\">Set " + i + "</th>");
+							}
+						</script>
+						<th style="width:50px;">Total Points</th>
+					</tr>
+					<tr>
+						<td  style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							gs = game.team1.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td  style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Start Time</td>
+						<script>
+							strDate = game.startTime.length>0?game.startTime[0]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\"> " + strDate  + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>End Time</td>
+						<script>
+							strDate = game.endTime.length>0?game.endTime[0]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\">" + strDate + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="team" id="soloteam1">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							document.write("<tr>");
+							document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+							document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+							document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">");
+							for (var j in game.playerstatus){
+								ps = game.playerstatus[j];
+								if (ps.id == player.status){
+									document.write(ps.description);
+									break;
+								}
+							}
+							document.write("</td>");
+							document.write("</tr>");
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="team" id="soloteam2">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							document.write("<tr>");
+							document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+							document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+							document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+							document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+							document.write("<td style=\"width:50px;text-align:center;\">");
+							for (var j in game.playerstatus){
+								ps = game.playerstatus[j];
+								if (ps.id == player.status){
+									document.write(ps.description);
+									break;
+								}
+							}
+							document.write("</td>");
+							document.write("</tr>");
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="timeoutsummary">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Time Out Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<script>
+							timeout = game.team1.timeouts[0]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<script>
+							timeout = game.team2.timeouts[0]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="substitutionsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Substitution Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:30px;text-align:center;\" colspan=2> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team1.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team2.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="injurysummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1)+">Injury Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						inj1 = game.team1.injuries[0]
+						inj2 = game.team2.injuries[0]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var injury1 = inj1[i-1];
+							var injury2 = inj2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury1==undefined?"":injury1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury2==undefined?"":injury2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+			<br>
+			<div id="cardsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1 )+">Card Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						co1 = game.team1.cardoffence[0]
+						co2 = game.team2.cardoffence[0]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var card1 = co1[i-1];
+							var card2 = co2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card1==undefined?"":card1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card2==undefined?"":card2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+		</div>
+		<div id="page2" style="display:none">
+			<h1 style="top:80px;">MATCH RESULT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<br>
+			<div style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Match Summary</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[0].wins)</script></td>
+						<script>
+							gs = game.team1.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[0].wins)</script></td>
+						<script>
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=3>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th colspan=" + (gs.length + 1)+ ">" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div style="position:relative;top:100px;width:620px;">
+				<script>
+					l=0;
+					for(k=0;k<scorestamp.team1[l].set.length;k++){
+						document.write("<table border=1 style=\"top:0px;left:48px;left:20px;\">");
+						len = scorestamp.team1[l].set[k].score.length;
+						ctr = len / 23;
+						for (j=0;j<ctr;j++){
+							document.write("<tr>");
+							document.write("<td rowspan=\"2\" style=\"text-align:center;width:30px;\">" + scorestamp.team1[l].set[k].setno + "</td>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team1.name + "</td>");
+							gs = scorestamp.team1[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+							document.write("<tr>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team2.name + "</td>");
+							gs = scorestamp.team2[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+						}
+						document.write("</table><br>");
+					}
+				</script>
+			</div>
+
+		</div>
+		<div id="page3" style="display:none">
+			<h1 style="top:80px;">MATCH REPORT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<label style="position:absolute;left:320px;top:120px;font-size:12px;width=100px;"><b>REGU 1</b></label>
+			<br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].officialref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].courtref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].ref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].asstref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].lineref1){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[0].lineref2){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:250px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:270px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:290px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<div id="scoreregu1" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:50px;">Team</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\">Set " + i + "</th>");
+							}
+						</script>
+						<th style="width:50px;">Total Points</th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							gs = game.team1.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team1.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Start Time</td>
+						<script>
+							strDate = game.startTime.length>0?game.startTime[0]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\"> " + strDate  + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>End Time</td>
+						<script>
+							strDate = game.endTime.length>0?game.endTime[0]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\">" + strDate + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div  class="team" id="regu1team1">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							if (player.gameno==1){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status){
+										document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div  class="team" id="regu1team2">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							if(player.gameno==1){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status){
+										document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="timeoutsummary">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Time Out Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<script>
+							timeout = game.team1.timeouts[0]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<script>
+							to = game.team2.timeouts[0]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="substitutionsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Substitution Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:30px;text-align:center;\" colspan=2> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team1.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team2.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[0]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="injurysummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1)+">Injury Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						inj1 = game.team1.injuries[0]
+						inj2 = game.team2.injuries[0]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var injury1 = inj1[i-1];
+							var injury2 = inj2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury1==undefined?"":injury1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury2==undefined?"":injury2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+			<br>
+			<div id="cardsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1 )+">Card Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						co1 = game.team1.cardoffence[0]
+						co2 = game.team2.cardoffence[0]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var card1 = co1[i-1];
+							var card2 = co2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card1==undefined?"":card1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card2==undefined?"":card2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+		</div>
+		<div id="page4" style="display:none">
+			<h1 style="top:80px;">MATCH RESULT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<label style="position:absolute;left:320px;top:120px;font-size:12px;width=100px;"><b>REGU 1</b></label>
+			<br>
+			<div style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Match Summary</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[0].wins)</script></td>
+						<script>
+							gs = game.team1.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[0].wins)</script></td>
+						<script>
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=3>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th colspan=" + (gs.length + 1)+ ">" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div style="position:relative;top:100px;width:620px;">
+				<script>
+					l=0;
+					for(k=0;k<scorestamp.team1[l].set.length;k++){
+						document.write("<table border=1 style=\"top:0px;left:48px;left:20px;\">");
+						len = scorestamp.team1[l].set[k].score.length;
+						ctr = len / 23;
+						for (j=0;j<ctr;j++){
+							document.write("<tr>");
+							document.write("<td rowspan=\"2\" style=\"text-align:center;width:30px;\">" + scorestamp.team1[l].set[k].setno + "</td>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team1.name + "</td>");
+							gs = scorestamp.team1[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+							document.write("<tr>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team2.name + "</td>");
+							gs = scorestamp.team2[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+						}
+						document.write("</table><br>");
+					}
+				</script>
+			</div>
+
+		</div>
+		<div id="page5" style="display:none">
+			<h1 style="top:80px;">MATCH REPORT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<label style="position:absolute;left:320px;top:120px;font-size:12px;width=100px;"><b>REGU 2</b></label>
+			<br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[1].officialref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[1].courtref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[1].ref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[1].asstref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[1].lineref1){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[1].lineref2){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:250px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:270px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:290px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<div id="scoreregu2" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:50px;">Team</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\">Set " + i + "</th>");
+							}
+						</script>
+						<th style="width:50px;">Total Points</th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team1.setwins.length>1)document.write(game.team1.setwins[1].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team1.gamescore.length > 1){
+								gs = game.team1.gamescore[1]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									tot += parseInt(sc.score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team2.setwins.length>1)document.write(game.team2.setwins[1].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team2.gamescore.length > 1){
+								gs = game.team2.gamescore[1]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									tot += parseInt(sc.score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team1.gamescore[1]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Start Time</td>
+						<script>
+							strDate = game.startTime.length>0?game.startTime[1]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\"> " + strDate  + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>End Time</td>
+						<script>
+							strDate = game.endTime.length>0?game.endTime[1]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\">" + strDate + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="team" id="regu2team1">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							if (player.gameno==2){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status){
+										document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="team" id="regu2team2">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							if(player.gameno==2){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status){
+										document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="timeoutsummary">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Time Out Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<script>
+							timeout = game.team1.timeouts[1]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<script>
+							to = game.team2.timeouts[1]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="substitutionsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Substitution Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:30px;text-align:center;\" colspan=2> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team1.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[1]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[1]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team2.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[1]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[1]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="injurysummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1)+">Injury Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						inj1 = game.team1.injuries[1]
+						inj2 = game.team2.injuries[1]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var injury1 = inj1[i-1];
+							var injury2 = inj2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury1==undefined?"":injury1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury2==undefined?"":injury2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+			<br>
+			<div id="cardsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1 )+">Card Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						co1 = game.team1.cardoffence[1]
+						co2 = game.team2.cardoffence[1]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var card1 = co1[i-1];
+							var card2 = co2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card1==undefined?"":card1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card2==undefined?"":card2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+		</div>
+		<div id="page6" style="display:none">
+			<h1 style="top:80px;">MATCH RESULT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<label style="position:absolute;left:320px;top:120px;font-size:12px;width=100px;"><b>REGU 2</b></label>
+			<br>
+			<div style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Match Summary</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<td style="text-align:center;"><script>if (game.team1.setwins.length>1)document.write(game.team1.setwins[1].wins)</script></td>
+						<script>
+							if (game.team1.gamescore.length > 1){
+								gs = game.team1.gamescore[1]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<td style="text-align:center;"><script>if (game.team2.setwins.length>1)document.write(game.team2.setwins[1].wins)</script></td>
+						<script>
+							if (game.team2.gamescore.length > 1){
+								gs = game.team2.gamescore[1]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=3>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[1]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th colspan=" + (gs.length + 1)+ ">" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div style="position:relative;top:100px;width:620px;">
+				<script>
+					l=1;
+					for(k=0;k<scorestamp.team1[l].set.length;k++){
+						document.write("<table border=1 style=\"top:0px;left:48px;left:20px;\">");
+						len = scorestamp.team1[l].set[k].score.length;
+						ctr = len / 23;
+						for (j=0;j<ctr;j++){
+							document.write("<tr>");
+							document.write("<td rowspan=\"2\" style=\"text-align:center;width:30px;\">" + scorestamp.team1[l].set[k].setno + "</td>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team1.name + "</td>");
+							gs = scorestamp.team1[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+							document.write("<tr>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team2.name + "</td>");
+							gs = scorestamp.team2[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+						}
+						document.write("</table><br>");
+					}
+				</script>
+
+			</div>
+
+		</div>
+		<div id="page7" style="display:none">
+			<h1 style="top:80px;">MATCH REPORT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<label style="position:absolute;left:320px;top:120px;font-size:12px;width=100px;"><b>REGU 3</b></label>
+			<br>
+			<div id="officials" style="position:relative;top:90px;">
+				<table border=0px style="left:48px;width=10px;">
+					<tr>
+						<td style="font-weight:bold">OFFICIAL REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[2].officialref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">COURT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[2].courtref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[2].ref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">ASSISTANT REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[2].asstref){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[2].lineref1){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold">LINE REFEREE</td>
+						<td style="text-align:center;width:10px;">:</td>
+						<td>
+							<script>
+								var ref;
+								if (game.eventofficials.length > 1)
+								for(var i in game.referees){
+									ref = game.referees[i];
+									if (ref.id==game.eventofficials[2].lineref2){
+										document.write("(" + ref.noc + ") " + ref.name );
+										break;
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<label style="position:relative;top:0px; left:250px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+				<label style="position:relative;top:0px; left:270px;font-size:18px;">VS</label>
+				<label style="position:relative;top:0px; left:290px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			</div>
+			<div id="scoreregu3" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:50px;">Team</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\">Set " + i + "</th>");
+							}
+						</script>
+						<th style="width:50px;">Total Points</th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team1.setwins.length>1)document.write(game.team1.setwins[2].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team1.gamescore.length > 1){
+								gs = game.team1.gamescore[2]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									tot += parseInt(sc.score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team2.setwins.length>1)document.write(game.team2.setwins[2].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team2.gamescore.length > 1){
+								gs = game.team2.gamescore[2]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									tot += parseInt(sc.score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team1.gamescore[2]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Start Time</td>
+						<script>
+							strDate = game.startTime.length>0?game.startTime[2]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\"> " + strDate  + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>End Time</td>
+						<script>
+							strDate = game.endTime.length>0?game.endTime[2]:" "
+							document.write("<th colspan=" + (gs.length + 1) + " style=\"width:60px;text-align:center;\">" + strDate + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="team" id="regu3team1">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team1.noc + " - " + game.team1.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							if (player.gameno==3){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status){
+										document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team1.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team1.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="team" id="regu3team2">
+				<label style="position:relative;left:48px;width=10px;font-family:helvetica;font-weight:bold;font-size:14px;"><script> document.write( game.team2.noc + " - " + game.team2.name);</script></label>
+				<table border=1 style="top:0px;left:48px;width=10px;">
+					<tr>
+						<th style="width:50px;">No.</th>
+						<th style="width:180px;">Name</th>
+						<th style="width:60px;">Position</th>
+						<th style="width:80px;">Date of Birth</th>
+						<th style="width:60px;word-wrap:break-word;">Height (m)</th>
+						<th style="width:60px;word-wrap:break-word;">Weight (kg)</th>
+						<th style="width:50px;">Status</th>
+					</tr>
+
+					<script>
+						var player, ps;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							if(player.gameno==3){
+								document.write("<tr>");
+								document.write("\t\t<td  style=\"width:50px; text-align:center;\">" +  player.jersey + "</td>\n");
+								document.write("\t\t<td  style=\"width:180px;\">" + player.name + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + player.position + "</td>\n");
+								document.write("\t\t<td  style=\"width:80px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+								document.write("\t\t<td  style=\"width:60px;text-align:center;\">" + (player.weight==null?"":player.weight) + "</td>\n");
+								document.write("<td style=\"width:50px;text-align:center;\">");
+								for (var j in game.playerstatus){
+									ps = game.playerstatus[j];
+									if (ps.id == player.status){
+										document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+										break;
+									}
+								}
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="7">
+						Team Manager : <script>document.write(game.team2.manager);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Coach : <script>document.write(game.team2.coach);</script>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+						Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="timeoutsummary">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Time Out Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<script>
+							timeout = game.team1.timeouts[2]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<script>
+							timeout = game.team1.timeouts[2]
+							for(i=1;i<=game.noofset;i++){
+								// first sub
+								var to = timeout[i-1];
+								if (to!=undefined)
+									document.write("<td style=\"width:20px;text-align:center;\">" + (to.setno==i?to.time:"-") + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="substitutionsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Substitution Summary</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:30px;text-align:center;\" colspan=2> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team1.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[2]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name  + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team1.substitution[2]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (IN)")</script></td>
+						<td style="text-align:center;width:50px;" rowspan=2><script>document.write(game.team2.noc)</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[2]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.in) + "</td>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name + " (OUT)")</script></td>
+						<script>
+							// this is per game!
+							sub = game.team2.substitution[2]
+
+							for(i=0;i<game.noofset;i++){
+								var sc = sub[i][0];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+								var sc = sub[i][1];
+								document.write("<td style=\"width:20px;text-align:center;\">" + (sc==undefined?"-":sc.out) + "</td>");
+							}
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="injurysummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1)+">Injury Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						inj1 = game.team1.injuries[2]
+						inj2 = game.team2.injuries[2]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var injury1 = inj1[i-1];
+							var injury2 = inj2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury1==undefined?"":injury1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (injury2==undefined?"":injury2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+			<br>
+			<div id="cardsummary" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<script>
+							document.write("<th style=\"width:150px;\" rowspan=" + (parseInt(game.noofset) + 1 )+">Card Offence Summary</th>");
+						</script>
+						<th style="text-align:center;width:40px;"></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team1.name)</script></th>
+						<th style="text-align:center;width:150px;"><script>document.write(game.team2.name)</script></th>
+					</tr>
+					<script>
+						// this is per game!
+						co1 = game.team1.cardoffence[2]
+						co2 = game.team2.cardoffence[2]
+						for(var i=1;i<=game.noofset;i++){
+							// first inj
+							var card1 = co1[i-1];
+							var card2 = co2[i-1];
+							document.write("<tr>");
+							document.write("<th style=\"width:30px;text-align:center;\"> Set " + i + "</th>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card1==undefined?"":card1.notes) + "</td>");
+							document.write("<td style=\"width:30px;text-align:center;\">" + (card2==undefined?"":card2.notes) + "</td>");
+							document.write("</tr>");
+						}
+					</script>
+				</table>
+			</div>
+		</div>
+		<div id="page8" style="display:none">
+			<h1 style="top:80px;">MATCH RESULT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<label style="position:absolute;left:320px;top:120px;font-size:12px;width=100px;"><b>REGU 3</b></label>
+			<br>
+			<div style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:150px;" colspan=2>Match Summary</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\"> Set " + i + "</th>");
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team1.noc)</script></td>
+						<td style="text-align:center;"><script>if (game.team1.setwins.length>1)document.write(game.team1.setwins[2].wins)</script></td>
+						<script>
+							if (game.team1.gamescore.length > 1){
+								gs = game.team1.gamescore[2]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;width:50px;"><script>document.write(game.team2.noc)</script></td>
+						<td style="text-align:center;"><script>if (game.team2.setwins.length>1)document.write(game.team2.setwins[2].wins)</script></td>
+						<script>
+							if (game.team2.gamescore.length > 1){
+								gs = game.team2.gamescore[2]
+								for(i=0;i<gs.length;i++){
+									var sc = gs[i];
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc.score + "</th>");
+								}
+							}
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=3>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[2]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th colspan=" + (gs.length + 1)+ ">" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div style="position:relative;top:100px;width:620px;">
+				<script>
+					l=2;
+					for(k=0;k<scorestamp.team1[l].set.length;k++){
+						document.write("<table border=1 style=\"top:0px;left:48px;left:20px;\">");
+						len = scorestamp.team1[l].set[k].score.length;
+						ctr = len / 23;
+						for (j=0;j<ctr;j++){
+							document.write("<tr>");
+							document.write("<td rowspan=\"2\" style=\"text-align:center;width:30px;\">" + scorestamp.team1[l].set[k].setno + "</td>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team1.name + "</td>");
+							gs = scorestamp.team1[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+							document.write("<tr>");
+							document.write("<td style=\"text-align:left;width:200px;\">" + game.team2.name + "</td>");
+							gs = scorestamp.team2[l].set[k].score;
+							for(i=j*23;i<((j+1)*23);i++){
+								if (i>=gs.length)
+									break;
+								var sc = gs[i];
+								document.write("<td style=\"width:13px;text-align:center;\">" + sc.score + "</td>");
+							}
+							document.write("</tr>");
+						}
+						document.write("</table><br>");
+					}
+				</script>
+			</div>
+
+		</div>
+		<div id="page9" style="display:none">
+			<h1 style="top:80px;">MATCH REPORT</h1>
+			<label style="position:relative;left:250px;top:120px;font-size:18px;text-align:right;" ><script>document.write(game.team1.noc);</script></label>
+			<label style="position:relative;left:270px;top:120px;font-size:18px;">VS</label>
+			<label style="position:relative;left:290px;top:120px;font-size:18px;text-align:left;" ><script>document.write(game.team2.noc);</script></label>
+			<br>
+			<label style="position:relative;left:265px;top:120px;font-size:18px;text-align:center;" ><script>document.write(game.team1.overallscore);</script></label>
+			<label style="position:relative;left:305px;top:120px;font-size:18px;">-</label>
+			<label style="position:relative;left:345px;top:120px;font-size:18px;text-align:center;" ><script>document.write(game.team2.overallscore);</script></label>
+			<br><br>
+			<label style="position:absolute;left:50px;top:170px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:170px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:170px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:170px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="scoreteam" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:50px;">REGU</th>
+						<th style="width:50px;">Team</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\">Set " + i + "</th>");
+							}
+						</script>
+						<th style="width:50px;">Total Points</th>
+					</tr>
+					<tr>
+						<td rowspan="3" style="text-align:center;">REGU 1</td>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team1.gamescore[0];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[0];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Time</td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[0];
+							for (var j in sc){
+								tot += parseInt(sc[j].duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].duration +(sc[j].duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td rowspan="3" style="text-align:center;">REGU 2</td>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team1.setwins.length>1) document.write(game.team1.setwins[1].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team1.gamescore.length > 1){
+								var sc = game.team1.gamescore[1];
+								for (var j in sc){
+									tot += parseInt(sc[j].score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team2.setwins.length>1)document.write(game.team2.setwins[1].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team2.gamescore.length > 1){
+								var sc = game.team2.gamescore[1];
+								for (var j in sc){
+									tot += parseInt(sc[j].score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Time</td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[1];
+							for (var j in sc){
+								tot += parseInt(sc[j].duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].duration +(sc[j].duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td rowspan="3" style="text-align:center;">REGU 3</td>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team1.setwins.length>1)document.write(game.team1.setwins[2].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team1.gamescore.length > 1){
+								var sc = game.team1.gamescore[2];
+								for (var j in sc){
+									tot += parseInt(sc[j].score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>if (game.team2.setwins.length>1)document.write(game.team2.setwins[2].wins)</script></td>
+						<script>
+							var tot=0;
+							if (game.team2.gamescore.length > 1){
+								var sc = game.team2.gamescore[2];
+								for (var j in sc){
+									tot += parseInt(sc[j].score);
+									document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+								}
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Time</td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[2];
+							for (var j in sc){
+								tot += parseInt(sc[j].duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].duration +(sc[j].duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=3>Duration</td>
+						<script>
+							var tot=0;
+							gs = game.team2.gamescore[0]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							gs = game.team2.gamescore[1]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							gs = game.team2.gamescore[2]
+							for(i=0;i<gs.length;i++){
+								var sc = gs[i];
+								tot += parseInt(sc.duration);
+								//document.write("<th style=\"width:60px;text-align:center;\">" + sc.duration +(sc.duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th colspan=" + (gs.length + 1)+ ">" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+				</table>
+			</div>
+			<br>
+			<div id="TOteam" style="position:relative;top:100px;width:550px;">
+				<table border=0 cellspacing="0" cellpadding="5" style="width:550px;left:48px;">
+					<tr>
+						<td>
+							<table border=1 cellspacing="0" cellpadding="1">
+								<tr>
+									<td colspan="3" ><b><script> document.write( game.team1.noc + " - " + game.team1.name);</script></b></td>
+								</tr>
+								<tr>
+									<th style="width:50px;">No.</th>
+									<th style="width:150px;">Name</th>
+									<th style="width:50px;">REGU</th>
+								</tr>
+
+								<script>
+									var player, ps;
+									for(var i in game.team1.players){
+										player = game.team1.players[i];
+										document.write("<tr>");
+										document.write("\t\t<td  style=\"text-align:center;\">" +  player.jersey + "</td>\n");
+										document.write("\t\t<td style=\"width:150px;text-align:left;\">" + player.name + "</td>\n");
+										document.write("<td style=\"width:50px;text-align:center;\">");
+										for (var j in game.playerstatus){
+											ps = game.playerstatus[j];
+											if (ps.id == player.status){
+												document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+												break;
+											}
+										}
+										document.write("</td>");
+										document.write("</tr>");
+									}
+								</script>
+								<tr>
+									<td colspan="3">
+									Team Manager : <script>document.write(game.team1.manager);</script>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+									Coach : <script>document.write(game.team1.coach);</script>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+									Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>   </td>
+						<td>
+						<table border=1 cellspacing="0" cellpadding="1">
+							<tr>
+								<td colspan="3"><b><script> document.write( game.team2.noc + " - " + game.team2.name);</script></b></td>
+							</tr>
+							<tr>
+								<th style="width:50px;">No.</th>
+								<th style="width:150px;">Name</th>
+								<th style="width:50px;">REGU</th>
+							</tr>
+
+							<script>
+								var player, ps;
+								for(var i in game.team2.players){
+									player = game.team2.players[i];
+									document.write("<tr>");
+									document.write("\t\t<td style=\"text-align:center;\">" +  player.jersey + "</td>\n");
+									document.write("\t\t<td style=\"width:150px;text-align:left;\">" + player.name + "</td>\n");
+									document.write("<td style=\"width:50px;text-align:center;\">");
+									for (var j in game.playerstatus){
+										ps = game.playerstatus[j];
+										if (ps.id == player.status){
+											document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+											break;
+										}
+									}
+									document.write("</td>");
+									document.write("</tr>");
+								}
+							</script>
+							<tr>
+								<td colspan="3">
+								Team Manager : <script>document.write(game.team2.manager);</script>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+								Coach : <script>document.write(game.team2.coach);</script>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+								Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br>
+		<!--div id="page10">
+			<h1 style="top:80px;">MATCH REPORT</h1>
+			<label style="position:absolute;left:50px;top:120px;font-size:12px;width=100px;"><b>MATCH NO.:</b></label>
+			<label style="position:absolute;left:130px;top:120px;font-size:12px;width=100px;"><script>document.write(game.idmatch);</script></label>
+			<label style="position:absolute;left:200px;top:120px;font-size:12px;width=100px;"><b>COURT NO.:</b></label>
+			<label style="position:absolute;left:280px;top:120px;font-size:12px;width=100px;"><script>document.write(game.courtno);</script></label><br><br>
+			<div id="scoreteam" style="position:relative;top:100px;width:550px;">
+				<table border=1 style="top:0px;left:48px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<th style="width:50px;">REGU</th>
+						<th style="width:50px;">Team</th>
+						<th style="width:50px;">Score</th>
+						<script>
+							for(var i=1;i<=game.noofset;i++){
+								document.write("<th style=\"width:60px;text-align:center;\">Set " + i + "</th>");
+							}
+						</script>
+						<th style="width:50px;">Total Points</th>
+					</tr>
+					<tr>
+						<td rowspan="3" style="text-align:center;">REGU 1</td>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team1.gamescore[0];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[0].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[0];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Time</td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[0];
+							for (var j in sc){
+								tot += parseInt(sc[j].duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].duration +(sc[j].duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td rowspan="3" style="text-align:center;">REGU 2</td>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[1].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team1.gamescore[1];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[1].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[1];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Time</td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[1];
+							for (var j in sc){
+								tot += parseInt(sc[j].duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].duration +(sc[j].duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+					<tr>
+						<td rowspan="3" style="text-align:center;">REGU 3</td>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team1.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team1.setwins[2].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team1.gamescore[2];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:left;width:200px;"><script>document.write(game.team2.name)</script></td>
+						<td style="text-align:center;"><script>document.write(game.team2.setwins[2].wins)</script></td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[2];
+							for (var j in sc){
+								tot += parseInt(sc[j].score);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].score + "</th>");
+							}
+						</script>
+						<th><script>document.write(tot);</script></th>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan=2>Time</td>
+						<script>
+							var tot=0;
+							var sc = game.team2.gamescore[2];
+							for (var j in sc){
+								tot += parseInt(sc[j].duration);
+								document.write("<th style=\"width:60px;text-align:center;\">" + sc[j].duration +(sc[j].duration>0?"mins":"min") + "</th>");
+							}
+							document.write("<th>" + tot +(tot>0?"mins":"min") + "</th>");
+						</script>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div id="TOteam" style="position:relative;top:100px;width:550px;">
+				<table border=0 cellspacing="0" cellpadding="5" style="width:550px;left:48px;">
+					<tr>
+						<td>
+							<table border=1 cellspacing="0" cellpadding="1">
+								<tr>
+									<td colspan="3" ><b><script> document.write( game.team1.noc + " - " + game.team1.name);</script></b></td>
+								</tr>
+								<tr>
+									<th style="width:50px;">No.</th>
+									<th style="width:150px;">Name</th>
+									<th style="width:50px;">REGU</th>
+								</tr>
+
+								<script>
+									var player, ps;
+									for(var i in game.team1.players){
+										player = game.team1.players[i];
+										document.write("<tr>");
+										document.write("\t\t<td  style=\"text-align:center;\">" +  player.jersey + "</td>\n");
+										document.write("\t\t<td style=\"width:150px;text-align:left;\">" + player.name + "</td>\n");
+										document.write("<td style=\"width:50px;text-align:center;\">");
+										for (var j in game.playerstatus){
+											ps = game.playerstatus[j];
+											if (ps.id == player.status){
+												document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+												break;
+											}
+										}
+										document.write("</td>");
+										document.write("</tr>");
+									}
+								</script>
+								<tr>
+									<td colspan="3">
+									Team Manager : <script>document.write(game.team1.manager);</script>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+									Coach : <script>document.write(game.team1.coach);</script>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+									Asst Coach : <script>document.write(game.team1.asstcoach);</script>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>   </td>
+						<td>
+						<table border=1 cellspacing="0" cellpadding="1">
+							<tr>
+								<td colspan="3"><b><script> document.write( game.team2.noc + " - " + game.team2.name);</script></b></td>
+							</tr>
+							<tr>
+								<th style="width:50px;">No.</th>
+								<th style="width:150px;">Name</th>
+								<th style="width:50px;">REGU</th>
+							</tr>
+
+							<script>
+								var player, ps;
+								for(var i in game.team2.players){
+									player = game.team2.players[i];
+									document.write("<tr>");
+									document.write("\t\t<td style=\"text-align:center;\">" +  player.jersey + "</td>\n");
+									document.write("\t\t<td style=\"width:150px;text-align:left;\">" + player.name + "</td>\n");
+									document.write("<td style=\"width:50px;text-align:center;\">");
+									for (var j in game.playerstatus){
+										ps = game.playerstatus[j];
+										if (ps.id == player.status){
+											document.write(ps.id==1?"R"+player.gameno+","+ps.description:player.gameno!=255?"R"+player.gameno:"RESERVE");
+											break;
+										}
+									}
+									document.write("</td>");
+									document.write("</tr>");
+								}
+							</script>
+							<tr>
+								<td colspan="3">
+								Team Manager : <script>document.write(game.team2.manager);</script>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+								Coach : <script>document.write(game.team2.coach);</script>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+								Asst Coach : <script>document.write(game.team2.asstcoach);</script>
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div-->
+		<div style="position:relative;top:100px;width:550px;">
+			<label style="position:absolute;width:650px;left:48px;top:0px;font-size:10px;">Legend:</label>
+			<label style="position:absolute;width:650px;left:68px;top:10px;font-size:10px;">C  :  Captain</label>
+			<label style="position:absolute;width:650px;left:68px;top:20px;font-size:10px;">R  :  Reserve</label>
+			<script>
+				if(game.gamecount>1){
+					document.write("<label style=\"position:absolute;width:650px;left:148px;top:10px;font-size:10px;\">R1 :  REGU 1</label>");
+					document.write("<label style=\"position:absolute;width:650px;left:148px;top:20px;font-size:10px;\">R2 :  REGU 2</label>");
+					document.write("<label style=\"position:absolute;width:650px;left:148px;top:30px;font-size:10px;\">R3 :  REGU 3</label>");
+				}
+			</script>
+		</div>
+		<br><br><br>
+		<div id="approver" style="position:relative;top:150px;width:550px;">
+			<label style="position:relative; font-size:10px;top:0px;text-align:left;left:48px;font-family:helvetica;">Approved By:</label><br>
+			<table style="left:48px;">
+				<tr>
+					<td style="width:300px;"><label>Chief Referee</label></td>
+					<td><label>Technical Delegate</label></td>
+				</tr>
+			</table><br><br><br>
+			<table style="left:48px;">
+				<tr>
+					<td style="width:300px;"><script>document.write(game.chiefreferee);</script></td>
+					<td><script>document.write(game.technicaldelegate);</script></td>
+				</tr>
+			</table>
+		</div>
+		<br><br><br>
+		<div id="menu" class="no-print" style="position:relative;top:100px;width:550px;">
+			<br>
+			<div id="menuSolo" style="position:relative;width:650px;top:30px;">
+				<table id="options" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td>
+							<a id="lnksolo1" onclick="switchPageSolo(1)">REGU</a>
+						</td>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" id="lnksolo2" onclick="switchPageSolo(2)">SCORE STAMP</a>
+						</td>
+					</tr>
+				</table>
+				<!--table id="options" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" onclick="switchPageSolo(10)">Time Out, Substitution and Offence Summary</a>
+						</td>
+					</tr>
+				</table-->
+			</div>
+			<div id="menuTeam" style="position:relative;width:650px;top:0px;">
+				<table id="options" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td>
+							<a id="lnk9" onclick="switchPageTeam(9)">OVERALL</a>
+						</td>
+						<td>
+							<a href="#" id="lnk3" onclick="switchPageTeam(3)">REGU 1</a>
+						</td>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" id="lnk5" onclick="switchPageTeam(5)">REGU 2</a>
+						</td>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" id="lnk7" onclick="switchPageTeam(7)">REGU 3</a>
+						</td>
+						<td style="width:10px;"></td>
+					</tr>
+				</table>
+				<table id="options" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td>
+							<a href="#" id="lnk4" onclick="switchPageTeam(4)">SCORE STAMP 1</a>
+						</td>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" id="lnk6" onclick="switchPageTeam(6)">SCORE STAMP 2</a>
+						</td>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" id="lnk8" onclick="switchPageTeam(8)">SCORE STAMP 3</a>
+						</td>
+					</tr>
+				</table>
+				<!--table id="options" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td style="width:10px;"></td>
+						<td>
+							<a href="#" onclick="switchPageTeam(10)">Time Out, Substitution and Offence Summary</a>
+						</td>
+					</tr>
+				</table-->
+			</div>
+			<div style="position:relative;width:650px;top:0px;">
+				<hr style="position:relative; top:45px; left:0px; width:650px;">
+				<table style="position:absolute;margin-left:auto;margin-right:auto;top:50px;width:650px;" border=0>
+					<tr>
+						<td style="text-align:center;">
+							<img id="sponsor1logo" width=65>
+						</td>
+						<td width=100 style="text-align:center;">
+							<label style="max-width:60px;word-wrap: break-word;font-size:12px;left:0px;top:0px;text-align:center;color:gray">STARFISH SYSTEM</label>
+						</td>
+						<td style="text-align:center;">
+							<img id="sponsor2logo" width=65>
+						</td>
+					</tr>
+				</table>
+
+				<!--div style="position:absolute;left:190px;top:80px">
+					<img id="sponsor1logo" width=150 height=50 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+				</div>
+				<div style="position:absolute;left:400px;top:80px">
+					<img id="sponsor2logo" width=150 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+				</div>
+				<label style="position:absolute;max-width:60px;word-wrap: break-word;font-size:12px;left:300px;top:67px;text-align:center;color:gray">STARFISH SYSTEM</label-->
+				<div style="position:absolute;width:650px;top:120px;">
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+						<tr>
+							<td>
+								<input type="submit" class="btn" value="Print" onclick=printPage()>
+							</td>
+						</tr>
+					</table>
+					<br><br>
+				</div>
+			</div>
+			<script>
+				document.getElementById("menuSolo").style.display = "none";
+				document.getElementById("menuTeam").style.display = "none";
+				document.getElementById("page1").style.display="none";
+				document.getElementById("page2").style.display="none";
+				document.getElementById("page3").style.display="none";
+				document.getElementById("page4").style.display="none";
+				document.getElementById("page5").style.display="none";
+				document.getElementById("page6").style.display="none";
+				document.getElementById("page7").style.display="none";
+				document.getElementById("page8").style.display="none";
+				document.getElementById("page9").style.display="none";
+				//document.getElementById("page10").style.display="none";
+				if(game.gamecount==1){
+					document.getElementById("menuSolo").style.display = "block";
+					document.getElementById("page1").style.display="block";
+				}else{
+					document.getElementById("menuTeam").style.display = "block";
+					document.getElementById("page9").style.display="block";
+				}
+
+			</script>
+		</div>
+		<div class="footer">
+			<hr style="position:absolute; bottom:80px; left:0px; width:650px;">
+			<table style="position:absolute;margin-left:auto;margin-right:auto;bottom:25px;width:650px;" border=0>
+				<tr>
+					<td style="text-align:center;">
+						<img id="sponsor1logof" width=65>
+					</td>
+					<td width=100 style="text-align:center;">
+						<label style="max-width:60px;word-wrap: break-word;font-size:12px;left:0px;top:0px;text-align:center;color:gray">STARFISH SYSTEM</label>
+					</td>
+					<td style="text-align:center;">
+						<img id="sponsor2logof" width=65>
+					</td>
+				</tr>
+			</table>
+			<!--div style="position:absolute;left:0px;bottom:25px;width:250px;height:75px;" border=1>
+				<img id="sponsor1logof" style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:400px;bottom:25px">
+				<img id="sponsor2logof" width=150 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<label style="position:absolute;max-width:60px; word-wrap: break-word;font-size:12px;left:300px;bottom:10px;text-align:center;color:gray">STARFISH SYSTEM</label-->
+		</div>
+		<script>
+			displayLogo();
+		</script>
+	</body>
+</html>

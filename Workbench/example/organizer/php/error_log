@@ -1,0 +1,37 @@
+[06-Feb-2017 22:28:16 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[06-Feb-2017 22:29:30 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/getmatchdetail.php on line 124
+[06-Feb-2017 22:42:43 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[07-Feb-2017 05:30:55 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[07-Feb-2017 05:30:55 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[07-Feb-2017 05:30:55 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[07-Feb-2017 05:30:56 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[07-Feb-2017 05:46:52 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[07-Feb-2017 05:46:57 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 16:50:17 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 18:12:58 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 18:12:59 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 21:12:46 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 22:13:08 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 22:13:08 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[15-Feb-2017 22:13:08 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/sportsevent/public_html/TMSv02/organizer/php/checkuser.php on line 17
+[23-Mar-2018 05:11:46 UTC] PHP Fatal error:  Uncaught UnexpectedValueException: RecursiveDirectoryIterator::__construct(../../competitions/4/sponsors/): failed to open dir: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/getsponsorimages.php:11
+Stack trace:
+#0 /home/kb86hajhf4uf/public_html/organizer/php/getsponsorimages.php(11): RecursiveDirectoryIterator->__construct('../../competiti...', 4096)
+#1 {main}
+  thrown in /home/kb86hajhf4uf/public_html/organizer/php/getsponsorimages.php on line 11
+[23-Mar-2018 05:45:33 UTC] PHP Fatal error:  Uncaught UnexpectedValueException: RecursiveDirectoryIterator::__construct(../../competitions/4/sponsors/): failed to open dir: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/getsponsorimages.php:11
+Stack trace:
+#0 /home/kb86hajhf4uf/public_html/organizer/php/getsponsorimages.php(11): RecursiveDirectoryIterator->__construct('../../competiti...', 4096)
+#1 {main}
+  thrown in /home/kb86hajhf4uf/public_html/organizer/php/getsponsorimages.php on line 11
+[24-Mar-2018 04:12:40 UTC] PHP Warning:  imagepng(../../competitions/3/teams4/pogi.png): failed to open stream: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/image-resize.php on line 28
+[24-Mar-2018 04:12:40 UTC] PHP Warning:  chmod(): No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/uploadlogo.php on line 45
+[24-Mar-2018 04:16:07 UTC] PHP Warning:  imagepng(../../competitions/3/teams4/pogi.png): failed to open stream: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/image-resize.php on line 28
+[24-Mar-2018 04:16:07 UTC] PHP Warning:  chmod(): No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/uploadlogo.php on line 45
+[24-Mar-2018 04:20:17 UTC] PHP Warning:  imagepng(../../competitions/3/teams4/pogi.png): failed to open stream: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/image-resize.php on line 28
+[24-Mar-2018 04:20:17 UTC] PHP Warning:  chmod(): No such file or directory in /home/kb86hajhf4uf/public_html/organizer/php/uploadlogo.php on line 45
+[08-Apr-2018 12:15:12 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/kb86hajhf4uf/public_html/organizer/php/checkuser.php on line 17
+[08-Apr-2018 12:15:13 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/kb86hajhf4uf/public_html/organizer/php/checkuser.php on line 17
+[09-Apr-2018 07:35:40 UTC] PHP Notice:  Uninitialized string offset: 36 in /home/kb86hajhf4uf/public_html/organizer/php/savestartlist.php on line 22
+[09-Apr-2018 08:29:53 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/kb86hajhf4uf/public_html/organizer/php/saveeventgroup.php on line 15
+[09-Apr-2018 08:29:54 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/kb86hajhf4uf/public_html/organizer/php/saveeventgroup.php on line 18

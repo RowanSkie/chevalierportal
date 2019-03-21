@@ -1,0 +1,19 @@
+.center{
+	position:absolute;
+	height: 50em;
+	width: 30em;
+	left: 50%;
+	margin-left:-15em;
+	overflow-y: auto;	
+	overflow-x: auto;	
+}
+
+.maincenter{
+	position:absolute;
+	height: 50em;
+	width: 30em;
+	left: 50%;
+	margin-left:-15em;
+	overflow-y: auto;	
+	overflow-x: auto;	
+}

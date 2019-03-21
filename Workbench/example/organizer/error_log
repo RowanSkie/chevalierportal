@@ -1,0 +1,13 @@
+[23-Mar-2018 03:01:35 UTC] PHP Warning:  include(php/config.php): failed to open stream: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/index.php on line 3
+[23-Mar-2018 03:01:35 UTC] PHP Warning:  include(): Failed opening 'php/config.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/kb86hajhf4uf/public_html/organizer/index.php on line 3
+[23-Mar-2018 03:01:35 UTC] PHP Warning:  filesize(): stat failed for js/global.js in /home/kb86hajhf4uf/public_html/organizer/index.php on line 63
+[23-Mar-2018 03:01:37 UTC] PHP Warning:  include(php/config.php): failed to open stream: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/index.php on line 3
+[23-Mar-2018 03:01:37 UTC] PHP Warning:  include(): Failed opening 'php/config.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/kb86hajhf4uf/public_html/organizer/index.php on line 3
+[23-Mar-2018 03:01:37 UTC] PHP Warning:  filesize(): stat failed for js/global.js in /home/kb86hajhf4uf/public_html/organizer/index.php on line 63
+[23-Mar-2018 03:01:39 UTC] PHP Warning:  include(php/config.php): failed to open stream: No such file or directory in /home/kb86hajhf4uf/public_html/organizer/index.php on line 3
+[23-Mar-2018 03:01:39 UTC] PHP Warning:  include(): Failed opening 'php/config.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/kb86hajhf4uf/public_html/organizer/index.php on line 3
+[23-Mar-2018 03:01:39 UTC] PHP Warning:  filesize(): stat failed for js/global.js in /home/kb86hajhf4uf/public_html/organizer/index.php on line 63
+[23-Mar-2018 03:52:10 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/kb86hajhf4uf/public_html/organizer/php/config.php on line 8
+[23-Mar-2018 03:52:12 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/kb86hajhf4uf/public_html/organizer/php/config.php on line 8
+[23-Mar-2018 03:58:08 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/kb86hajhf4uf/public_html/organizer/php/config.php on line 8
+[23-Mar-2018 03:59:29 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/kb86hajhf4uf/public_html/organizer/php/config.php on line 8

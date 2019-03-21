@@ -1,0 +1,353 @@
+	<!DOCTYPE html>
+	<html oncontextmenu="return false">
+		<head>
+			<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+			<META HTTP-EQUIV="Expires" CONTENT="-1">
+			<meta http-equiv="expires" content="timestamp">
+			<meta http-equiv="cache-control" content="max-age=0" />
+			<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="expires" content="0" />
+			<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+			<script src="js/modernizr-2.6.2.min.js"></script>
+			<script src="js/jquery.js"></script>
+			<script src="js/jquery.ui.timepicker.js"></script>
+			<script src="js/jquery-ui.js"></script>
+			<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?version=1.0>"></script>
+			<script type="text/javascript" src="js/team.js?filever=<?=filesize('js/team.js')?version=1.3>"></script>
+			<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?version=1.0>"></script>
+			<script type="text/javascript" src="js/tabs.js?filever=<?=filesize('js/tabs.js')version=1.0?>"></script>
+			<link rel="stylesheet" type="text/css" href="css/team.css?version=1.0">
+			<link rel="stylesheet" type="text/css" href="css/menu.css?version=1.0">
+			<link rel="stylesheet" type="text/css" href="css/tab.css?version=1.0">
+			<link rel="stylesheet" type="text/css" href="css/tabs.css?version=1.0">
+			<link rel="stylesheet" type="text/css" href="css/jquery.ui.timepicker.css" />
+			<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+			<script src="js/modernizr-2.6.2.min.js"></script>
+			<script src="js/jquery.js"></script>
+			<script src="js/jquery.ui.timepicker.js"></script>
+			<script src="js/jquery-ui.js"></script>
+			<title>Organizer</title>
+			<script>
+				$(function() {
+					if (!Modernizr.inputtypes['date']) {
+						$('input[type=date]').datepicker({
+							dateFormat: 'dd-mm-yyyy'
+						});
+					}
+					if (!Modernizr.inputtypes['time']) {
+						$('input[type=time]').timepicker({
+							timeFormat: 'HH:MM'
+						});
+					}
+
+				});
+			</script>
+		</head>
+		<body style="font-family:Helvetica;" onload="set_interval();clearManageParticipant();" onmousemove="reset_interval()" onclick="reset_interval()" onkeypress="reset_interval()" onscroll="reset_interval()">
+			<ul style="font-family:helvetica;background-color: #333;">
+				<!--li class="icon">
+					<a>&#9776;</a>
+				</li-->
+				<li class="dropdown"><a href="main.html" onclick="loadHome()">Home</a>
+					<div class="dropdown-content">
+						<a href="index.php" onclick=logout()>Logout</a>
+					</div>
+				</li>
+				<li><a href="event.html#team" onclick="loadEvent(getParam('competition'),4)">Back</a></li>
+			</ul>
+			<h1 id="lblCompetitionTitle">
+			</h1>
+			<script>
+				var title = getCompetition(getParam('competition'));
+				var teamdetail=retrieveTeamManagement();
+				var gameTypes,teamParticipation;
+				var pp = getPlayerPosition();
+				var validExt=new Array(".xlsx", ".xls", ".csv");
+			</script>
+
+			<table style="position:relative;margin-left:auto;margin-right:auto;top:40px;">
+				<tr>
+					<td>
+						<label><script>document.write(teamdetail.name + " - " + teamdetail.category + " (" + teamdetail.noc  + ")");</script></label>
+					</td>
+				</tr>
+			</table>
+
+		<div class="main" style="position:relative;margin-left:auto;margin-right:auto;top:50px;">
+			<div class="tabs animated-fade">
+				<ul class="tab-links">
+					<li class="active"><a href="#Participants">Entry List</a></li>
+					<li><a href="#Players">Event Participants</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div id="Participants" class="tab active">
+						<br><br>
+						<!--div style="position:relative; max-height:300px;top:0px;overflow-x:auto;overflow-y:hidden;"-->
+						<div style="position:relative;top:0px;overflow-x:auto;overflow-y:hidden;">
+						<table cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:0px;" cellpadding="0" border="0" width="745">
+						 <tr>
+						  <td>
+						   <table style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1" width="720" >
+						   </table>
+						  </td>
+						 </tr>
+						<tr>
+						<td>
+						   <!--div style="width:535px; max-height:250px;overflow:auto;"-->
+						   <div style="width:745;overflow:auto;">
+							 <table  id="tblParticipants" style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1" width="720" >
+								 <tr style="color:white;background-color:grey">
+									<th style="width:80px;">MANAGE</th>
+									<th style="width:70px;">JERSEY NO.</th>
+									<th style="width:200px;">NAME</th>
+									<th style="width:100px;">GENDER</th>
+									<th style="width:170px;">POSITION</th>
+									<th style="width:100px;">DATE OF BIRTH</th>
+									<!--th style="width:50px;">HEIGHT</th>
+									<th style="width:50px;">WEIGHT</th>
+									<th style="width:100px;">PASSPORT</th>
+									<th style="width:200px;">E-MAIL</th>
+									<th style="width:100px;">NRIC</th>
+									<th style="width:100px;">MOBILE NO</th-->
+								 </tr>
+							 </table>
+						   </div>
+						  </td>
+						 </tr>
+						</table><br>
+						</div>
+						<form autocomplete="off"  name="player" action="#tab1" method="post" onsubmit="return addPlayer()">
+							<table style="position:relative; margin-left:auto;margin-right:auto; top:0px ;">
+								<tr>
+									<td style="width:100px;">Jersey no**:</td>
+									<td style="width:50px;">	</td>
+									<td><input type="number" min="0" max="100" id="jersey" style="width:40px;"></td>
+								</tr>
+								<tr>
+									<td>Name*:</td>
+									<td>	</td>
+									<td><input type="text" id="name" placeholder="Name" required style="width:250px;"></td>
+								</tr>
+								<tr>
+									<td colspan=2>PLAYER Position*:</td>
+									<td>
+									<select id="position" style="width:250px;" required>
+										<option value="">Select a Position</option>
+										<option value="TEAM MANAGER">TEAM MANAGER</option>
+										<option value="COACH">COACH</option>
+										<option value="ASST COACH">ASST COACH</option>
+										<option value="PLAYER">PLAYER</option>
+										<!--script>
+											for (var i in pp){
+												document.write("<option value=" + pp[i].ID + ">" + pp[i].Description + "</option>");
+											}
+										</script-->
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Gender*:</td>
+									<td style="width:50px;">	</td>
+									<td>
+										<select id="ddGender" name="ddGender" required style="width:250px;">
+											<option value="" selected>Select a Gender</option>
+											<script>
+												if (teamdetail.category=='MEN')
+													document.write("<option value='1'>MALE</option>");
+												if (teamdetail.category=='WOMEN')
+													document.write("<option value='2'>FEMALE</option>");
+												if (teamdetail.category=='BOTH'){
+													document.write("<option value='1'>MALE</option>");
+													document.write("<option value='2'>FEMALE</option>");
+												}
+											</script>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Date of Birth:</td>
+									<td>	</td>
+									<td><input type="date" id="birthdate" style="width:250px;"></td>
+								</tr>
+								<!--tr>
+									<td>Height (m):</td>
+									<td>	</td>
+									<td><input type="number" id="height"  min="0" step="0.01" placeholder="Height" style="width:250px;"></td>
+								</tr>
+								<tr>
+									<td>Weight (kg):</td>
+									<td>	</td>
+									<td><input type="number" id="weight"  min="0" step="0.01" placeholder="Weight" style="width:250px;"></td>
+								</tr>
+								<tr>
+									<td>Passport:</td>
+									<td>	</td>
+									<td><input type="text" id="passport" name="passport" maxlength="12" placeholder="Passport No" style="width:250px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr>
+									<td>NRIC:</td>
+									<td>	</td>
+									<td><input type="text" id="nric" name="nric" maxlength="20" placeholder="NRIC" style="width:250px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr>
+									<td>E-mail:</td>
+									<td>	</td>
+									<td><input type="email" id="email" name="email" style="width:250px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Mobile No:</td>
+									<td>	</td>
+									<td><input type="text" id="mobileno" name="mobileno" style="width:250px;font-size:14px;"></td>
+								</tr-->
+								<tr>
+									<td colspan=3>
+										<br>
+										<p>* Mandatory fields</p>
+										<p>** Mandatory field for players</p>
+									</td>
+								</tr>
+							</table><br>
+
+							<table id="tblAddParticipant" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+								<tr>
+									<td>
+										<input type="submit" class="btn" value="Add">
+									</td>
+								</tr>
+							</table>
+							<table id="tblManageParticipant" style="position:relative;margin-left:auto;margin-right:auto;top:0px;display:none;">
+								<tr>
+									<td>
+										<input class="btn" type="submit" name="btnSave" value="Update">
+										<input class="btn" type="button" name="btnRemove" value="Remove" onclick="removeParticipant()">
+										<input class="btn" type="button" name="btnCancel" value="Cancel" onclick="clearManageParticipant()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<br>
+						<iframe name="hiddenFrame" id="hiddenFrame" class="hide"></iframe>
+						<form autocomplete="off"  id="uploadparticipantscsv" method="post" action="php/uploadparticipants.php" enctype="multipart/form-data">
+							<table id="tblUploadParticipant" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+								<tr>
+									<td>Download Template</td>
+									<td>
+										<a href="templates/participants.csv" download="participants template.csv">Participants.csv</a>
+									</td>
+								</tr>
+								<tr>
+									<td>Batch Upload (CSV format only): </td>
+									<td>
+										<!--input id="fileSelect" type="file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /-->
+										<input id="teamCSV" name="teamCSV" type="file" accept=".csv" onchange="checkfile(this,validExt)"/>
+									</td>
+								</tr>
+								<tr>
+									<script>
+										document.write("<td colspan=\"2\">");
+										document.write("<input id=\"competition\" name=\"competition\" style=\"display:none\" value="+getParam("competition")+"> </input>");
+										document.write("</td>");
+									</script>
+								</tr>
+								<tr>
+									<script>
+										document.write("<td colspan=\"2\">");
+										document.write("<input id=\"email\" name=\"email\" style=\"display:none\" value="+getParam("email")+"> </input>");
+										document.write("</td>");
+									</script>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;"><br></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;">
+										<input type="submit" class="btn" value="Upload">
+										<input type="button" class="btn" value="Export" onclick="exportTeam()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<br>
+					</div>
+					<div id="Players" class="tab">
+						<br><br>
+						<!--div style="position:relative; max-height:300px;top:0px;overflow-x:auto;overflow-y:hidden;"-->
+						<div style="position:relative;top:0px;overflow-x:auto;overflow-y:hidden;">
+						<table cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:0px;" cellpadding="0" border="0" width="525">
+						 <tr>
+						  <td>
+						   <table style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1" width="500" >
+						   </table>
+						  </td>
+						 </tr>
+						<tr>
+						<td>
+						   <div style="width:625px;overflow:auto;">
+							 <table  id="tblEventPlayers"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1" width="600" >
+								 <tr style="color:white;background-color:grey">
+										<th style="width:100px;">EVENT</th>
+										<th style="width:100px;">CATEGORY</th>
+										<th style="width:100px;">JERSEY NO.</th>
+										<th style="width:200px;">NAME</th>
+										<th style="width:100px;">POSITION</th>
+								 </tr>
+							 </table>
+						   </div>
+						  </td>
+						 </tr>
+						</table>
+						</div>
+						<br><br>
+						<table style="position:relative;  margin-left:auto;margin-right:auto; top:0px;font-size:18px">
+							<tr>
+								<td>Event:</td>
+								<td>
+									<select id="ddGameType" name="ddGameType" style="width:200px;font-size:20px" onchange="createPlayerTable(tblPlayers,this.value,ddCategory.value)"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>Category:</td>
+								<td>
+									<select id="ddCategory" name="ddCategory" style="width:200px;font-size:20px" onchange="createPlayerTable(tblPlayers,ddGameType.value,this.value)">
+										<option value="" selected>Select a Category</option>
+										<script>
+											if (teamdetail.category=='MEN')
+												document.write("<option value='1'>MEN</option>");
+											if (teamdetail.category=='WOMEN')
+												document.write("<option value='2'>WOMEN</option>");
+											if (teamdetail.category=='BOTH'){
+												document.write("<option value='1'>MEN</option>");
+												document.write("<option value='2'>WOMEN</option>");
+											}
+										</script>
+									</select>
+								</td>
+							</tr>
+							<script>
+								retrieveGameType(getParam('competition'));
+							</script>
+						</table>
+						<br><br>
+						<table id="tblPlayers" style="position:relative; margin-left:auto;margin-right:auto; top:0px; width=100px;" border=0>
+							<tr></tr>
+						</table>
+						<br>
+						<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+							<tr>
+								<td>
+									<input class="btn" type="submit" name="btnJoin" onclick="joinCompetition(getParam('competition'),ddGameType.value,ddCategory.value)" value="Save">
+								</td>
+							</tr>
+						</table>
+						<br><br>
+					</div>
+				</div>
+			</div>
+		</div>
+			<script>
+				retrieveTeamPlayers();
+				getTeamParticipation();
+			</script>
+		</body>
+	</html>

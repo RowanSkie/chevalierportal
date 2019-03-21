@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="Cache-control" content="max-age=0" />
+		<meta http-equiv="Cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/event.js?filever=<?=filesize('js/event.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<script type="text/javascript" src="js/tabs.js?filever=<?=filesize('js/tabs.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="css/w3.css">
+		<link rel="stylesheet" type="text/css" href="css/menu.css?filever=<?=filesize('css/menu.css')?>">
+		<link rel="stylesheet" type="text/css" href="css/event.css?filever=<?=filesize('css/event.css')?>">
+		<link rel="stylesheet" type="text/css" href="css/tab.css?filever=<?=filesize('css/tab.css')?>">
+		<link rel="stylesheet" type="text/css" href="css/tabs.css?filever=<?=filesize('css/tabs.css')?>">
+		<link rel="stylesheet" type="text/css" href="css/maincenter.css?filever=<?=filesize('css/maincenter.css')?>">
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<title>Organizer</title>
+		<script>
+			$(function() {
+				if (!Modernizr.inputtypes['date']) {
+					$('input[type=date]').datepicker({
+						dateFormat: 'dd-mm-yyyy'
+					});
+				}
+				if (!Modernizr.inputtypes['time']) {
+					$('input[type=time]').timepicker({
+						showAnim: 'blind'
+					});
+				}
+			});
+		</script>
+	</head>
+	<body onload="set_interval();highlightSection();" onmousemove="reset_interval()" onclick="reset_interval()" onkeypress="reset_interval()" onscroll="reset_interval()">
+		<ul style="font-family:helvetica;background-color: #333;">
+			<!--li class="icon">
+				<a>&#9776;</a>
+			</li-->
+			<li class="dropdown"><a href="main.html" onclick="loadHome()">Home</a>
+				<div class="dropdown-content">
+					<a href="index.php" onclick=logout()>Logout</a>
+				</div>
+			</li>
+			<li><a href="main.html" onclick="loadHome()">Back</a></li>
+		</ul>
+
+		<script>
+			var validExt= new Array(".jpg",".jpeg",".png",".pjpeg");
+			var validSponsorExt= new Array(".jpg",".jpeg",".png",".pjpeg",".gif");
+			var validPNGExt= new Array(".png");
+			var validCSVExt= new Array(".xlsx", ".xls", ".csv");
+			getGameType(getParam('competition'));
+		</script>
+
+		<h1 id="lblCompetitionTitle"></h1>
+		<br><br><br>
+		<div class="maincenter">
+			<article class="tabs" style="width:1110px">
+				<section id="team" onclick="enableSection(1)">
+					<h2><a href="#team">Teams</a></h2>
+					<div id="section1" style="display:none;width:1090px;">
+						<br>
+						<div style="position:relative;left:10px;top:0px;overflow-x:auto;overflow-y:hidden;">
+						<script>
+							var evCnt = (gameTypes.length * 120) + 690;
+							document.write("<table cellspacing=1 style=\"position:relative;margin-left:auto;margin-right:auto;top:0px;\" cellpadding=0 border=0 width=" + evCnt.toString() + ">");
+						</script>
+						 <tr>
+						  <td>
+						   <table style="position:relative;left:0px;font-size:12px;" cellspacing="0" cellpadding="1" border="1">
+							 <tr style="color:white;background-color:grey">
+								<th rowspan=2 style="width:70px;">MANAGE</th>
+								<th rowspan=2 style="width:100px;">LOGO</th>
+								<th rowspan=2 style="width:170px;">NAME</th>
+								<th rowspan=2 style="width:50px;">CODE</th>
+								<th rowspan=2 style="width:100px;">CATEGORY</th>
+								<th rowspan=2 style="width:200px;">E-MAIL</th>
+								<script>
+									for(var j in gameTypes){
+										document.write("<th rowspan=\"1\" colspan=\"2\" style=\"width:120px;\">"+gameTypes[j].description+"</th>");
+									}
+								</script>
+							 </tr>
+							 <tr style="color:white;background-color:grey">
+									<script>
+										for(var j in gameTypes){
+											document.write("<th rowspan=\"1\" style=\"width:60px;\">MEN</th>");
+											document.write("<th rowspan=\"1\" style=\"width:60px;\">WOMEN</th>");
+										}
+									</script>
+							 </tr>
+						   </table>
+						  </td>
+						 </tr>
+						<tr>
+						<td>
+						   <!--div style="width:545px; max-height:200px; overflow:auto;"-->
+						   <!--div style="width:615px;overflow:auto;"-->
+							 <table id="tblTeam" style="position:relative;left:0px;font-size:12px;" cellspacing="0" cellpadding="1" border="1">
+							 </table>
+						   <!--/div-->
+						  </td>
+						 </tr>
+						</table>
+						</div>
+						<br><br>
+						<form autocomplete="off"  name="addteam" onsubmit="return registerTeam(players)">
+							<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:0px;">
+								<tr>
+									<td>Username</td>
+									<td id="spacer">:</td>
+									<td><input type="email" id="email" placeholder="Email" required style="width:250px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Password</td>
+									<td id="spacer">:</td>
+									<td><input type="password" id="password" placeholder="Password" required style="width:250px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Confirm password</td>
+									<td id="spacer">:</td>
+									<td><input type="password" id="confirmpassword" placeholder="Confirm Password" required style="width:250px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Team name</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="teamname" maxlength="30" placeholder="Team Name" required style="width:250px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr id="rowTeamCode" style="display:table-row;">
+									<td>Team code</td>
+									<td id="spacer">:</td>
+									<td>
+										<input type="text" id="teamcode" maxlength="5" placeholder="Team Code" style="width:250px;font-size:14px;text-transform:uppercase;">
+									</td>
+								</tr>
+								<tr id="rowTeamCodeLogo" style="display:table-row;">
+									<td>Custom Logo</td>
+									<td id="spacer">:</td>
+									<td><input type="file" accept=".png" name="customLogo" id="customLogo" onchange="checkfile(this,validPNGExt);"></td>
+								</tr>
+								<tr id="rowTeamNOC" style="display:none;">
+									<td>Team code</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddNoc" style="width:250px;font-size:14px;">
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Category</td>
+									<td id="spacer">:</td>
+									<td>
+									<select id="teamcategory" style="width:250px;font-size:14px;" required>
+										<option value="">Category</option>
+										<option value="1">MEN'S</option>
+										<option value="2">WOMEN'S</option>
+										<option value="3">BOTH</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<input id="competition" name="competition" style="display:none"></input>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<input id="idteam" name="idteam" style="display:none"></input>
+									</td>
+								</tr>
+							</table>
+							<br>
+							<div id="rowInternational">
+								<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+									<tr>
+										<td>
+											<input type="checkbox" name="useNOC" id="useNOC" checked=true style="font-size:16px;" onchange="toggleTeamCode(this.checked)">Use NOC as team code and logo</input>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<br>
+							<table id="tblAddTeam" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+								<tr>
+									<td>	</td>
+								</tr>
+								<tr>
+									<td>
+										<input class="btn" type="submit" value="Add">
+									</td>
+								</tr>
+							</table>
+							<table id="tblManageTeam" style="position:relative;margin-left:auto;margin-right:auto;top:0px;display:none">
+								<tr>
+									<td colspan="3" style="text-align:center">
+										<input type="checkbox" name="updatePassword" id="updatePassword" defaultChecked=false onchange="togglePassword(this.checked)">Update password</input>
+									</td>
+								</tr>
+								<tr>
+									<td>	</td>
+								</tr>
+								<tr>
+									<td>
+										<input class="btn" type="submit" name="btnSave" value="Update">
+										<input class="btn" type="button" name="btnRemove" value="Remove" onclick="removeTeam()">
+										<input class="btn" type="button" name="btnCancel" value="Cancel" onclick="clearManageTeam()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<br>
+					</div>
+				</section>
+
+				<section id="groups" onclick="enableSection(2)">
+					<h2><a href="#groups">Group</a></h2>
+					<div id="section2" style="display:none">
+						<div style="position:relative;top:50px;overflow-x:auto;overflow-y:hidden;">
+						<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;font-size:16px;">
+							<tr>
+								<td>View by Event</td>
+								<td id="spacer">:</td>
+								<td>
+									<select id="ddViewEGGameType" style="width:150px;font-size:14px;" onchange="displayEventGrouping(this.value)" required></select>
+								</td>
+							</tr>
+						</table>
+						<br><br>
+						<table cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:0px;" cellpadding="0" border="0">
+						 <tr>
+						  <td>
+						   <table style="position:relative;left:0px;font-size:12px;" cellspacing="0" cellpadding="1" border="1">
+							 <tr style="color:white;background-color:grey">
+								<th style="width:70px;">MANAGE</th>
+								<th style="width:100px;">EVENT</th>
+								<th style="width:100px;">CATEGORY</th>
+								<th style="width:170px;">NAME</th>
+								<th style="width:100px;">GROUP ID</th>
+								<th style="width:200px;">TEAM ID</th>
+							 </tr>
+						   </table>
+						  </td>
+						 </tr>
+						<tr>
+						<td>
+						   <!--div style="width:545px; max-height:200px; overflow:auto;"-->
+						   <!--div style="width:615px;overflow:auto;"-->
+							 <table id="tblTeamEventGroup" style="position:relative;left:0px;font-size:12px;" cellspacing="0" cellpadding="1" border="1">
+							 </table>
+						   <!--/div-->
+						  </td>
+						 </tr>
+						</table>
+						</div>
+						<br><br>
+						<form autocomplete="off"  name="formEventGroup" onsubmit="return addTeamEventGroup()">
+							<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:50px;">
+								<tr>
+									<td>Event</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddEGGameType" style="width:250px;font-size:14px;" onchange="populateEventGroupTeam();;retrieveCategory('ddEGCategory',this.value);" onclick="populateEventGroupTeam();retrieveCategory('ddEGCategory',this.value);" required></select>
+									</td>
+								</tr>
+								<tr>
+									<td>Category</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddEGCategory" style="width:250px;font-size:14px;" onchange="populateEventGroupTeam()" onclick="populateEventGroupTeam()" required>
+											<option value="">Select a Category</option>
+											<option value="1">MEN</option>
+											<option value="2">WOMEN</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Team</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddEGTeam" style="width:250px;font-size:14px;">
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Group</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddEGGroup" style="width:250px;font-size:14px;">
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Team ID in Group</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddEGTeamIDInGroup" style="width:250px;font-size:14px;">
+										</select>
+									</td>
+								</tr>
+							</table>
+							<br>
+							<table id="tblAddEventGroup" style="position:relative;margin-left:auto;margin-right:auto;top:50px;">
+								<tr>
+									<td>	</td>
+								</tr>
+								<tr>
+									<td>
+										<input class="btn" type="submit" value="Add">
+									</td>
+								</tr>
+							</table>
+							<table id="tblManageEventGroup" style="position:relative;margin-left:auto;margin-right:auto;top:50px;display:none">
+								<tr>
+									<td>
+										<input class="btn" type="submit" name="btnSave" value="Update">
+										<input class="btn" type="button" name="btnRemove" value="Remove" onclick="removeEGTeam()">
+										<input class="btn" type="button" name="btnCancel" value="Cancel" onclick="clearManageEGTeam()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<br><br><br>
+					</div>
+				</section>
+
+				<section id="schedule" onclick="enableSection(3)">
+					<h2><a href="#schedule">Schedule</a></h2>
+					<div id="section3" style="display:none;width:1090px;">
+						<table style="position:relative;  margin-left:auto;margin-right:auto;font-size:16px;top:50px;">
+							<tr>
+								<td>View by Event</td>
+								<td id="spacer">:</td>
+								<td>
+									<select id="ddViewGameType" style="width:150px;font-size:14px;" onchange="retrieveMatches(getParam('competition'),this.value)">
+									</select>
+								</td>
+						</table> <br>
+						<div style="position:relative;left:10px;top:50px;overflow-x:auto;overflow-y:hidden;">
+							<table cellspacing="1" style="position:relative;margin-left:auto;margin-right:auto;top:0px;" cellpadding="0" border="0" width="1700">
+								<tr>
+									<td>
+										<table style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+											<tr style="color:white;background-color:grey">
+												<th style="width:80px;">MANAGE</th>
+												<th style="width:100px;">REPORTS</th>
+												<th style="width:70px;">DATE</th>
+												<th style="width:70px;">TIME</th>
+												<th style="width:50px;">MATCH NO.</th>
+												<th style="width:50px;">COURT NO.</th>
+												<th style="width:150px;">TEAM A</th>
+												<th style="width:150px;">TEAM B</th>
+												<th style="width:100px;">EVENT</th>
+												<th style="width:90px;">CATEGORY</th>
+												<th style="width:100px;">PHASE</th>
+												<th style="width:100px;">Group</th>
+												<th style="width:50px;">CHANGE SIDE</th>
+												<th style="width:50px;">SET</th>
+												<th style="width:50px;">PTS</th>
+												<th style="width:150px;">STATUS</th>
+												<th style="width:100px;">MATCH SCORE</th>
+												<th style="width:200px;">SET SCORE</th>
+
+											</tr>
+										</table>
+									</td>
+								<tr>
+									<td>
+										<!--div style="max-width:1135; max-height:160px; overflow:auto;"-->
+										<!--div style="max-width:1295;overflow:auto;"-->
+											<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+
+											</table>
+										<!--/div-->
+									</td>
+								</tr>
+							</table>
+						</div>
+						<br><br><br>
+						<form autocomplete="off"  name="createevent" onsubmit="return saveMatch()">
+							<table style="position:relative; margin-left:auto;margin-right:auto;font-size:14px;top:50px;" border=0>
+								<tr>
+									<td>Phase</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="phase" style="width:210px;font-size:14px;" onclick="setMatchType(this.value)" onchange="setMatchType(this.value)" required>
+											<option value="">Select PHASE</option>
+											<option value="PRELIMINARY">PRELIMINARY</option>
+											<option value="QUARTER FINAL">QUARTER FINAL</option>
+											<option value="SEMI FINAL">SEMI FINAL</option>
+											<option value="FINAL">FINAL</option>
+										</select>
+									</td>
+								</tr>
+								<tr id="eventType"  style="display:none;">
+									<td colspan=3>
+										<table id="tblEventType" style="left:195px;margin-right:auto;text-align:left;">
+											<tr>
+												<td>
+													<input type="radio" name="rdEventType" value="Ladder" onclick="clearCategory()" onchange="clearCategory()"><label for="Ladder">Based on Group Ranking</label>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="rdEventType" value="PrevMatch" onclick="clearCategory()" onchange="clearCategory()" ><label for="PrevMatch">Choose From Result of Previous matches</label>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="rdEventType" value="Single" checked onclick="clearCategory()" onchange="clearCategory()" ><label for="Single">Select by Team</label>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td>Event</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="ddGameType" style="width:210px;font-size:14px;" onclick="retrieveCategory('category',this.value)" onchange="retrieveCategory('category',this.value)" required>
+										</select>
+									</td>
+								</tr>
+								<tr id="prelimGroup" style="display:none;">
+									<td>Group</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="group" style="width:210px;font-size:14px;"  onclick="clearCategory()" onchange="clearCategory()" required>
+										<option value=""></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Category</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="category" style="width:210px;font-size:14px;" onclick="populateTeam(this.value)" onchange="populateTeam(this.value)" required>
+										<option value=""></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan=3>
+										<table>
+											<tr>
+												<th style="width:150px;text-align:center">Team A</th>
+												<th style="width:50px;"></th>
+												<th style="width:150px;text-align:center">Team B</th>
+											</tr>
+											<tr>
+												<td>
+													<div id="lblTeam1" class="label"  style=";font-size:20px;left:50px;" ></div>
+												</td>
+												<td style="text-align:center;">vs</td>
+												<td>
+													<div id="lblTeam2" class="label" style=";font-size:20px;left:50px;" ></div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<select id="team1" style="width:200px;font-size:16px;" onchange="getNoc(this.value,'lblTeam1')" required>
+													</select>
+												</td>
+												<td></td>
+												<td>
+													<select id="team2" style="width:200px;font-size:16px;" onchange="getNoc(this.value,'lblTeam2')" required>
+													</select>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td>Match Description</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="description" maxlength="45" style="width:210px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr>
+									<td>Date</td>
+									<td id="spacer">:</td>
+									<td><input type="date" id="startdate"  required style="width:210px;font-size:14px;"> </td>
+								</tr>
+								<tr>
+									<td>Time</td>
+									<td id="spacer">:</td>
+									<td><input type="time" id="time" class="time" required style="width:210px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Match No</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="matchno" maxlength="6" placeholder="Match No" required style="width:210px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr>
+									<td>Court No</td>
+									<td id="spacer">:</td>
+									<td><input type="number" id="courtno" min="1" max="10" placeholder="Court No" required style="width:210px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Change side(mins)</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="changeside" style="width:210px;font-size:14px;" required>
+											<option value="1">1</option>
+											<option value="2" selected>2</option>
+											<option value="3">3</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>No. of Sets</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="setno" name="ddNoSets" style="width:210px;font-size:14px;" required>
+											<option value="1">1</option>
+											<option value="3" selected>3</option>
+											<option value="5">5</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>No. of Points</td>
+									<td id="spacer">:</td>
+									<td>
+										<select id="points" name="ddNoPoints" style="width:210px;font-size:14px;" required>
+											<option value="15">15</option>
+											<option value="21" selected>21</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+							<br><br><br>
+							<!--table id="tblmatches" style="position:relative;margin-left:auto;margin-right:auto;top:0px;font-size:16px;height:250px;width:600px" border=1>
+								<tr>
+									<th style="width:100px;">Date</th>
+									<th style="width:100px;">Time</th>
+									<th style="width:100px;">Match No.</th>
+									<th style="width:150px;">Team 1</th>
+									<th style="width:150px;">Team 2</th>
+									<th style="width:100px;">Court No.</th>
+								</tr>
+								<tbody style="height:200px; overflow:auto;">
+								</tbody>
+
+							</table-->
+							<table id="tblUpdateRanking" style="position:relative;margin-left:auto;margin-right:auto;top:10px;display:none;">
+								<tr>
+									<td>	</td>
+								</tr>
+								<tr>
+									<td>
+										<input class="btn" type="button" name="btnUpdate" value="Refresh Ranking" style="width:200px;" onclick="updateRanking()">
+									</td>
+								</tr>
+							</table>
+							<table id="tblAddSched" style="position:relative;margin-left:auto;margin-right:auto;top:10px;">
+								<tr>
+									<td>
+										<input type="submit" class="btn" value="Add" >
+									</td>
+								</tr>
+							</table>
+							<table id="tblManageSched" style="position:relative;margin-left:auto;margin-right:auto;top:10px;display:none;">
+								<tr>
+									<td>
+										<input class="btn" type="submit" name="btnSave" value="Update">
+										<input class="btn" type="button" name="btnRemove" value="Remove" onclick="removeEvent()">
+										<input class="btn" type="button" name="btnCancel" value="Cancel" onclick="clearManageSched()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<iframe name="hiddenFrame" id="hiddenFrame" class="hide"></iframe>
+						<br><br>
+						<form autocomplete="off"  id="uploadschedulecsv" method="post" action="php/uploadschedule.php" enctype="multipart/form-data">
+							<table id="tblUploadSchedule" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+								<tr>
+									<td>Download Template</td>
+									<td>
+										<a href="templates/schedule.csv" download="schedule template.csv">schedule.csv</a>
+									</td>
+								</tr>
+								<tr>
+									<td>Upload Schedule (CSV only): </td>
+									<td>
+										<!--input id="fileSelect" type="file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="checkfile(this,validCSVExt)"/-->
+										<input id="scheduleCSV" name="scheduleCSV" type="file" accept=".csv" onchange="checkfile(this,validCSVExt)"/>
+									</td>
+								</tr>
+								<tr>
+									<script>
+										document.write("<td colspan=\"2\">");
+										document.write("<input id=\"competition\" name=\"competition\" style=\"display:none\" value="+getParam("competition")+"> </input>");
+										document.write("</td>");
+									</script>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;"><br></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;">
+										<input type="submit" class="btn" value="Upload" >
+										<input type="button" class="btn" value="Export" onclick="exportSchedule()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<br>
+						<span>NOTE: Teams and Grouping must be defined prior </span>
+						<span>      to importing CSV file.</span>
+
+						<br>
+						<script>
+							retrieveGameType(getParam('competition'));
+						</script>
+						<br>
+					</div>
+				</section>
+
+				<!--section id="forms" onclick="enableSection(6)">
+					<h2><a href="#forms">Forms</a></h2>
+					<div id="section6" style="display:none">
+					<br><br>
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;font-size:16px;">
+						<tr>
+							<td>Match No</td>
+							<td id="spacer">:</td>
+							<td>
+								<select id="ddMatch1" name="ddMatch1" style="width:250px;font-size:20px;"></select>
+							</td>
+						</tr>
+						<script>
+							retrieveMatch(getParam("competition"));
+						</script>
+					</table><br><br>
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+						<tr>
+							<td>
+								<input class="btn" style="font-size:16px;" type="submit" name="btnSL" onclick="loadGameDetail(ddMatch1.value)" value="Start List">
+							</td>
+							<td>
+								<input class="btn" style="font-size:16px;" type="submit" name="btnMR" onclick="loadMatchReport(getParam('competition'),ddMatch1.value)" value="Match Report">
+							</td>
+						</tr>
+					</table>
+					<br>
+					</div>
+				</section-->
+
+				<section id="summary" onclick="enableSection(4)">
+					<h2><a href="#summary"><span>Summary</span></a></h2>
+					<div id="section4" style="display:none;">
+						<table style="position:relative;margin-left:auto;margin-right:auto;top:50px;font-size:16px;">
+							<tr>
+								<td>Event</td>
+								<td id="spacer">:</td>
+								<td>
+									<select id="ddCSGameType" style="width:150px;font-size:14px;" onchange="retrieveCategory('cscategory',this.value)" required></select>
+								</td>
+							</tr>
+							<tr>
+								<td>Category</td>
+								<td id="spacer">:</td>
+								<td>
+									<select id="cscategory" style="width:150px;font-size:14px;" required>
+									<option value=""></option>
+									</select>
+								</td>
+							</tr>
+						</table>
+						<br><br>
+						<table style="position:relative;margin-left:auto;margin-right:auto;top:50px;font-size:16px;">
+							<tr>
+								<td>
+									<input class="btn" style="font-size:16px;" type="submit" name="btnSL" onclick="generateCS(ddCSGameType.value,cscategory.value)" value="Generate">
+								</td>
+							</tr>
+						</table>
+						<br><br><br>
+					</div>
+				</section>
+
+				<section id="officials" onclick="enableSection(7)">
+					<h2><a href="#officials">Officials</a></h2>
+					<div id="section7" style="display:none;width:1090px;">
+						<br><br>
+						<div style="position:relative;left:10px;top:0px;overflow-x:auto;overflow-y:hidden;">
+							<table cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:0px;" cellpadding="0" border="0" width="1285">
+							 <tr>
+							  <td>
+							   <table style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1" width="1260" >
+								 <tr style="color:white;background-color:grey">
+									<th style="width:70px;">MANAGE</th>
+									<th style="width:150px;">TYPE</th>
+									<th style="width:170px;">ROLE</th>
+									<th style="width:200px;">NAME</th>
+									<th style="width:70px;">NOC</th>
+									<th style="width:100px;">PASSPORT</th>
+									<th style="width:100px;">NRIC</th>
+									<th style="width:100px;">DATE OF BIRTH</th>
+									<th style="width:200px;">E-MAIL</th>
+									<th style="width:100px;">MOBILE NO</th>
+								 </tr>
+							   </table>
+							  </td>
+							 </tr>
+							<tr>
+							<td>
+								 <table  id="tblOfficials"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1" width="1260" >
+								 </table>
+							  </td>
+							 </tr>
+							</table>
+						</div>
+						<br><br>
+						<form autocomplete="off"  name="officials" method="post" onsubmit="return addOfficial()">
+							<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:0px;">
+								<tr>
+									<td>Type</td>
+									<td id="spacer">:</td>
+									<td>
+									<select id="ddType" name="ddType" style="width:250px;font-size:14px;" onchange="changeRole(this.value)" required>
+										<option value="" selected>Select a Type</option>
+										<option value="TECHNICAL">TECHNICAL</option>
+										<option value="NON-TECHNICAL">NON-TECHNICAL</option>
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Role</td>
+									<td id="spacer">:</td>
+									<td>
+									<select id="ddOR" name="ddOR" style="width:250px;font-size:14px;" required>
+										<option value="">Select a Role</option>
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Name</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="officialname" name="officialname" maxlength="45" placeholder="Name" required style="width:250px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>NOC</td>
+									<td id="spacer">:</td>
+									<td>
+									<select id="ddONoc" name="ddNoc" style="width:250px;font-size:14px;" required>
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Passport</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="passport" name="passport" maxlength="12" placeholder="Passport No" style="width:250px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr>
+									<td>NRIC</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="nric" name="nric" maxlength="20" placeholder="NRIC" style="width:250px;font-size:14px;text-transform:uppercase;"></td>
+								</tr>
+								<tr>
+									<td>Date of Birth</td>
+									<td id="spacer">:</td>
+									<td><input type="date" id="birthdate" name="birthdate" style="width:250px;font-size:14px;"  value="1980-01-01"></td>
+								</tr>
+								<tr>
+									<td>E-mail</td>
+									<td id="spacer">:</td>
+									<td><input type="email" id="email" name="email" style="width:250px;font-size:14px;"></td>
+								</tr>
+								<tr>
+									<td>Mobile No</td>
+									<td id="spacer">:</td>
+									<td><input type="text" id="mobileno" name="mobileno" style="width:250px;font-size:14px;"></td>
+								</tr>
+							</table><br><br>
+							<table id="tblAddOfficial" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+								<tr>
+									<td>
+										<input type="submit" class="btn" value="Add" >
+									</td>
+								</tr>
+							</table>
+							<table id="tblManageOfficial" style="position:relative;margin-left:auto;margin-right:auto;top:0px;display:none;">
+								<tr>
+									<td>
+										<input class="btn" type="submit" name="btnSave" value="Update">
+										<input class="btn" type="button" name="btnRemove" value="Remove" onclick="removeOfficial()">
+										<input class="btn" type="button" name="btnCancel" value="Cancel" onclick="clearManageOfficial()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<iframe name="hiddenFrame" id="hiddenFrame" class="hide"></iframe>
+						<br><br>
+						<form autocomplete="off"  id="uploadofficialscsv" method="post" action="php/uploadofficials.php" enctype="multipart/form-data">
+							<table id="tblUploadOfficial" style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+								<tr>
+									<td>Download Template</td>
+									<td>
+										<a href="templates/officials.csv" download="official template.csv">Officials.csv</a>
+									</td>
+								</tr>
+								<tr>
+									<td>Batch Upload (CSV only): </td>
+									<td>
+										<!--input id="fileSelect" type="file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="checkfile(this,validCSVExt)"/-->
+										<input id="officialCSV" name="officialCSV" type="file" accept=".csv" onchange="checkfile(this,validCSVExt)"/>
+									</td>
+								</tr>
+								<tr>
+									<script>
+										document.write("<td colspan=\"2\">");
+										document.write("<input id=\"competition\" name=\"competition\" style=\"display:none\" value="+getParam("competition")+"> </input>");
+										document.write("</td>");
+									</script>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;"><br></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:center;">
+										<input type="submit" class="btn" value="Upload" >
+										<input type="button" class="btn" value="Export" onclick="exportOfficials()">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<br>
+					</div>
+				</section>
+
+				<section id="accreditation" onclick="enableSection(8)">
+					<h2><a href="#accreditation">Accreditation</a></h2>
+					<div id="section8" style="display:none">
+					<br><br>
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;font-size:24px;">
+						<tr>
+							<td>Teams:</td>
+							<td>	</td>
+							<td>
+							<select id="ddParticipant" style="width:265px;font-size:16px;" onchange="retrieveTeamPlayers(this.value)">
+							</select>
+							</td>
+						</tr>
+					</table>
+					<br><br>
+					<!--div style="position:relative; max-height:370px;top:0px;overflow-x:auto;overflow-y:hidden;"-->
+					<div style="position:relative;top:0px;overflow-x:auto;overflow-y:hidden;">
+					<table cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:0px;" cellpadding="0" border="0" width="1090">
+					 <tr>
+					  <td>
+					   <table style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						 <tr style="color:white;background-color:grey">
+							<th style="width:200px;">TEAM</th>
+							<th style="width:150px;">ACCREDITATION</th>
+							<th style="width:200px;">NAME</th>
+							<th style="width:170px;">POSITION</th>
+							<th style="width:70px;">NOC</th>
+							<th style="width:200px;">E-MAIL</th>
+							<th style="width:100px;">MOBILE NO</th>
+
+						 </tr>
+					   </table>
+					  </td>
+					 </tr>
+					<tr>
+					<td>
+					   <!--div style="width:595;max-height:320px;overflow:auto;"-->
+					   <!--div style="width:695;overflow:auto;"-->
+						 <table  id="tblParticipants"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						 </table>
+					   <!--/div-->
+					  </td>
+					 </tr>
+					</table>
+					</div>
+					<script>
+						retrieveTeamPlayers("");
+					</script>
+					<br><br>
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+						<tr>
+							<td>Prefix</td>
+							<td id="spacer">:</td>
+							<td><input type="text" id="idPrefix" maxlength="5" required style="width:210px;font-size:14px;text-transform:uppercase;"></td>
+						</tr>
+					</table>
+					<br><br>
+					<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+						<tr>
+							<td>
+								<input class="btn" type="submit" name="btnAccreditation" onclick="generateAccreditation(idPrefix.value);" value="Generate">
+							</td>
+						</tr>
+					</table>
+					<br>
+					</div>
+				</section>
+
+				<section id="sponsors" onclick="enableSection(5)">
+					<h2><a href="#sponsors">Sponsors</a></h2>
+					<div id="section5" style="display:none">
+					<table cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:50px;" cellpadding="0" border="0" width="250">
+						<tr>
+							<td>
+								<table style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+									<tr style="color:white;background-color:grey">
+										<th style="width:250px;">SPONSORS</th>
+									</tr>
+								</table>
+							</td>
+						<tr>
+							<td>
+								<table id="tblSponsors"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+								</table>
+							</td>
+						</tr>
+					</table>
+					<br>
+					<form autocomplete="off"  name="uploadsponsor" onsubmit="return uploadSponsor()">
+						<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:50px;" border=0>
+							<tr>
+								<td>Sponsor image file</td>
+								<td id="spacer">:</td>
+								<td><input type="file" accept=".jpg,.jpeg,.pjpg,.png,.gif" name="imgfile" id="imgfile"  onchange="checkfile(this,validSponsorExt);"></td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<input id="competition" name="competition" style="display:none" value=""> </input>
+								</td>
+							</tr>
+						</table>
+						<br><br>
+						<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:50px;" border=0>
+							<tr>
+								<td style="text-align:center">
+									<input type="submit" class="btn" value="Upload" >
+								</td>
+							</tr>
+						</table>
+					</form>
+					<br><br><br>
+					</div>
+				</section>
+
+				<section id="report" onclick="enableSection(9)">
+					<h2><a href="#report">Logo</a></h2>
+					<div id="section9" style="display:none">
+					<table id="tblReportLogoHeader" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:50px;" cellpadding="0" border="0">
+						<tr>
+							<td colspan="3" style="text-align:center;height:50px;"><b>Header</b></td>
+						</tr>
+						<tr>
+							<td style="text-align:center;width:80px;">Competition Logo</td>
+							<td id="spacer">:</td>
+							<td>
+								<div class="w3-container">
+									<img class="w3-image" width="100" height="400" id="leftlogo">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:center;width:80px;">Right Logo</td>
+							<td id="spacer">:</td>
+							<td>
+								<div class="w3-container">
+									<img class="w3-image" width="100" height="400" id="rightlogo">
+								</div>
+							</td>
+						</tr>
+					</table>
+					<br><br>
+					<table  id="tblReportLogoFooter" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:50px;" cellpadding="0" border="0">
+						<tr>
+							<td colspan="3" style="text-align:center;height:10px;"><b>Footer</b></td>
+						</tr>
+						<tr>
+							<td style="text-align:center;width:80px;">Sponsor 1</td>
+							<td id="spacer">:</td>
+							<td>
+								<div class="w3-container">
+									<img class="w3-image" width="150" height="600" id="sponsor1logo">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:center;width:80px;">Sponsor 2</td>
+							<td id="spacer">:</td>
+							<td>
+								<div class="w3-container">
+									<img class="w3-image" width="150" height="600" id="sponsor2logo">
+								</div>
+							</td>
+						</tr>
+					</table>
+					<br><br><br><br>
+					<iframe name="hiddenFrame" class="hide"></iframe>
+					<form autocomplete="off"  id="uploadlogo" method="post" action="php/uploadimage.php" enctype="multipart/form-data">
+						<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:0px;" border=0>
+							<tr>
+								<td>Type</td>
+								<td id="spacer">:</td>
+								<td>
+								<select id="logo" name="logo" style="width:162px;font-size:14px;" required>
+
+									<option value="left">Competition/Left Logo</option>");
+									<option value="right">Right Logo</option>");
+									<option value="sponsor1">Sponsor 1 Logo</option>");
+									<option value="sponsor2">Sponsor 2 Logo</option>");
+								</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Image</td>
+								<td id="spacer">:</td>
+								<td><input type="file" accept=".jpg,.jpeg,.pjpg,.png" name="imgfile" id="imgfile"  onchange="checkfile(this,validExt);"></td>
+							</tr>
+							<tr>
+								<script>
+									document.write("<td colspan=\"3\">");
+									document.write("<input id=\"competition\" name=\"competition\" style=\"display:none\" value="+getParam("competition")+"> </input>");
+									document.write("</td>");
+								</script>
+							</tr>
+						</table>
+						<br><br>
+						<table style="position:relative;margin-left:auto;margin-right:auto;font-size:14px;top:0px;" border=0>
+							<tr>
+								<td style="text-align:center">
+									<input type="submit" class="btn" value="Upload" >
+								</td>
+							</tr>
+						</table>
+					</form>
+					<br>
+					</div>
+				</section>
+			</article>
+		</div>
+		<br><br>
+
+		<script>
+			getCompetitionParam();
+			getOfficials();
+			//displayTeams();
+			retrieveCompetitionTeams();
+			retrieveMatches(getParam("competition"),"");
+			getCompetition(getParam("competition"))
+			getSponsorImages();
+			retrieveEventGrouping("");
+			var players = [];
+			highlightSection();
+		</script>
+
+	</body>
+</html>

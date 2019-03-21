@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/matchdetail.js?filever=<?=filesize('js/matchdetail.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<script type="text/javascript" src="js/tabs.js?filever=<?=filesize('js/tabs.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="css/matchdetail.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/menu.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/tab.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/tabs.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<title>Start List</title>
+	</head>
+	<body style="font-family:Helvetica;" onload="set_interval()" onmousemove="reset_interval()" onclick="reset_interval()" onkeypress="reset_interval()" onscroll="reset_interval()">
+		<ul style="font-family:helvetica;background-color: #333;">
+			<!--li class="icon">
+				<a>&#9776;</a>
+			</li-->
+			<li class="dropdown"><a href="main.html" onclick="loadHome()">Home</a>
+				<div class="dropdown-content">
+					<a href="index.php" onclick=logout()>Logout</a>
+				</div>
+			</li>
+			<li class="dropdown"><a>Print</a>
+				<div class="dropdown-content">
+					<a href="" onclick="printGame('0')">Start List for Registration</a>
+					<a href="" onclick="printGame('1')">Official Start List</a>
+				</div>
+			</li>
+			<li><a href="event.html#schedule" onclick="loadEvent(getParam('competition'),2)">Back</a></li>
+		</ul>
+
+		<div class="center">
+			<script>
+				getGameDetails(1);
+			</script>
+			<h1>SELECT TO START LIST</h1><br><br><br><br><br><br><br>
+			<div name="officials" style="width:600px;top:0px;display:block;">
+				<label class="label" style="width:115px;">DATE</label>
+				<label class="label">MATCH NO</label>
+				<label class="label">TEAM A</label>
+				<label class="label">TEAM B</label>
+				<label class="label"> COURT</label><br>
+				<table style="top:0px;left:0px;font-size:20px" border=1>
+					<tr style="text-align:center;">
+						<td style="width:135px; text-align:center;">
+							<label><script>document.write(game.date);</script></label>
+						</td>
+						<td style="width:103px; text-align:center;">
+							<label><script>document.write(game.idmatch);</script></label>
+						</td>
+						<td style="width:83px; text-align:center;">
+							<label><script>document.write(game.team1.noc);</script></label>
+						</td>
+						<td style="width:83px; text-align:center;">
+							<label><script>document.write(game.team2.noc);</script></label>
+						</td>
+						<td style="width:73px; text-align:center;">
+							<label><script>document.write(game.courtno);</script></label>
+						</td>
+				</table>
+			</div><br>
+
+			<label class="label" style="left:-100px; top:0px;cursor:pointer;" title="Click to hide/show Officials" onclick="toggleView('officials')">  OFFICIALS  </label>
+			<select id="officialSet" style="top:150px; left: 300px; width:170px; height:25px; font-size: 12px;" onchange="updateOfficials(game,officialSet.value)">
+				<script>
+					var eventOfficial;
+					for(var i in game.eventofficials){
+						eventOfficial = game.eventofficials[i];
+						document.write("<option value=" + i + ">" + game.event + " " + eventOfficial.gameno + "</option>\n");
+					}
+				</script>
+			</select>
+			<script>
+				if (game.gamecount==1){
+					document.getElementById("officialSet").style.display="none"
+				}
+			</script>
+			<div id="officials" style="width:1000px;top:0px;display:block;">
+				<!--table  style="top:0px;left:0px;width=10px;"-->
+				<table style="top:0px;left:-100px;" border=0>
+				<tr>
+					<td>OFFICIAL REFEREE:</td>
+					<td>
+						<select id="ddOfficialReferee" style="top:150px; left: 270px; width:270px; height:25px; font-size: 12px;" onchange="game.eventofficials[officialSet.value].officialref=this.value;getNoc(this.value,'lblNOCOfficialRef');">
+							<option value="-1"></option>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									document.write("<option value=" + ref.id + ">" + ref.name + "</option>\n");
+								}
+							</script>
+						</select>
+					</td>
+					<td>
+						<input type="text" style="width:50px;" id="lblNOCOfficialRef" readonly></input>
+					</td>
+				</tr>
+				<tr>
+					<td>COURT REFEREE:</td>
+					<td>
+						<select id="ddCourtRef" style="top:300px; left: 270px; width:270px; height:25px; font-size: 12px;" onchange="game.eventofficials[officialSet.value].courtref=this.value;getNoc(this.value,'lblCourtRef');">
+							<option value="-1"></option>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									document.write("<option value=" + ref.id + ">" + ref.name + "</option>\n");
+								}
+							</script>
+						</select>
+					</td>
+					<td>
+						<input type="text" style="width:50px;" id="lblCourtRef" readonly></input>
+					</td>
+				</tr>
+				<tr>
+					<td>REFEREE:</td>
+					<td>
+						<select id="ddReferee" style="top:180px; left: 270px; width:270px; height:25px; font-size: 12px;" onchange="game.eventofficials[officialSet.value].ref=this.value;getNoc(this.value,'lblNOCRef');">
+							<option value="-1"></option>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									document.write("<option value=" + ref.id + ">" + ref.name + "</option>\n");
+								}
+							</script>
+						</select>
+					</td>
+					<td>
+						<input type="text" style="width:50px;" id="lblNOCRef" readonly></input>
+					</td>
+				</tr>
+				<tr>
+					<td>ASST REFEREE:</td>
+					<td>
+						<select id="ddAsstReferee" style="top:210px; left: 270px; width:270px; height:25px; font-size: 12px;" onchange="game.eventofficials[officialSet.value].asstref=this.value;getNoc(this.value,'lblNOCAsstRef');">
+							<option value="-1"></option>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									document.write("<option value=" + ref.id + ">" + ref.name + "</option>\n");
+								}
+							</script>
+						</select>
+					</td>
+					<td>
+						<input type="text" style="width:50px;" id="lblNOCAsstRef" readonly></input>
+					</td>
+				</tr>
+				<tr>
+					<td>LINE REFEREE:</td>
+					<td>
+						<select id="ddLineReferee1" style="top:240px; left: 270px; width:270px; height:25px; font-size: 12px;" onchange="game.eventofficials[officialSet.value].lineref1=this.value;getNoc(this.value,'lblNOCLineRef1');">
+							<option value="-1"></option>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									document.write("<option value=" + ref.id + ">" + ref.name + "</option>\n");
+								}
+							</script>
+						</select>
+					</td>
+					<td>
+						<input type="text" style="width:50px;" id="lblNOCLineRef1" readonly></input>
+					</td>
+				</tr>
+				<tr>
+					<td>LINE REFEREE:</td>
+					<td>
+						<select id="ddLineReferee2" style="top:270px; left: 270px; width:270px; height:25px; font-size: 12px;" onchange="game.eventofficials[officialSet.value].lineref2=this.value;getNoc(this.value,'lblNOCLineRef2');">
+							<option value="-1"></option>
+							<script>
+								var ref;
+								for(var i in game.referees){
+									ref = game.referees[i];
+									document.write("<option value=" + ref.id + ">" + ref.name + "</option>\n");
+								}
+							</script>
+						</select>
+					</td>
+					<td>
+						<input type="text" style="width:50px;" id="lblNOCLineRef2" readonly></input>
+					</td>
+				</tr>
+				</table>
+			</div><br><br>
+
+			<label class="label" style="left:-100px; width:200px;top:0px;cursor:pointer;" title="Click to hide/show Team 1" onclick="toggleView('team1')"><script>document.write(game.team1.noc +"-"+ game.team1.name);</script></label>
+			<div id="team1" style="width:1000px;top:0px;display:block;">
+				<table style="top:0px;left:-100px;"border=0>
+					<tr>
+						<td>NAME OF TEAM</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td style="width:280px;"><script>document.write(game.team1.name);</script></td>
+						<td>COUNTRY</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td style="width:100px;text-align:right;"><script>document.write(game.team1.country);</script></td>
+					</tr>
+					<tr>
+						<td>NOC</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team1.noc);</script></td>
+					</tr>
+					<tr>
+						<td>TEAM MANAGER</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team1.manager);</script></td>
+					</tr>
+					<tr>
+						<td>COACH</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team1.coach);</script></td>
+					</tr>
+					<tr>
+						<td>ASST COACH</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team1.asstcoach);</script></td>
+					</tr>
+				</table>
+				<!--label class="label" style="left:-100px;">JERSEY</label>
+				<label class="label" style="left:-100px;width:185px;">NAME</label>
+				<label class="label" style="left:-100px;width:80px;">POSITION</label>
+				<label class="label" style="left:-100px;">HEIGHT(M)</label>
+				<label class="label" style="left:-100px;">DATE OF BIRTH</label>
+				<label class="label" style="left:-100px;width:80px;">STATUS</label>
+				<script>
+					if (game.gamecount>1){
+						document.write("<label class=\"label\" style=\"left:-100px;width:70px;\">REGU</label>");
+					}
+				</script-->
+				<table id="tblHome" style="top:0px;left:-100px;" border=1>
+					<tr style="color:white;background-color:grey">
+						<th style="width:80px;">JERSEY</th>
+						<th style="width:100px;">NAME</th>
+						<th style="width:70px;">POSITION</th>
+						<th style="width:70px;">HEIGHT(M)</th>
+						<th style="width:50px;">DATE OF BIRTH</th>
+						<th style="width:50px;">STATUS</th>
+						<script>
+							if (game.gamecount>1){
+								document.write("<th style=\"width:50px;\">REGU</th>");
+							}
+						</script>
+					</tr>
+					<script>
+						var player, ps, ddid1,ddid2;
+						for(var i in game.team1.players){
+							player = game.team1.players[i];
+							document.write("<tr>");
+							document.write("\t\t<td  style=\"width:80px; text-align:center;\">" +  player.jersey + "</td>\n");
+							document.write("\t\t<td  style=\"width:200px;\">" + player.name + "</td>\n");
+							document.write("\t\t<td  style=\"width:100px;text-align:center;\">"	 + player.position + "</td>\n");
+							document.write("\t\t<td  style=\"width:100px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+							document.write("\t\t<td  style=\"width:140px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+							ddid1 = game.team1.idteam + "_" + player.jersey;
+							document.write("<td style=\"width:100px;text-align:center;\">");
+							tmp = "<select id=" + ddid1 + " style=\"width:50px;text-align:center;\"";
+							if (game.gamecount>1){
+								ddid2 = game.team1.idteam + "_GAME_" + player.jersey;
+								tmp += " onchange=\"setGameStatus(this.value,'" + ddid2 + "')\"";
+							}
+							tmp += ">";
+							document.write(tmp);
+							for (var j in game.playerstatus){
+								ps = game.playerstatus[j];
+								document.write("<option value=\"" + ps.id + "\"" + ((ps.id) == (player.status) ? " selected=\"true\">" : ">") + ps.description + "</option>\n");
+							}
+							document.write("</td>");
+							// for multiple game event
+							if (game.gamecount>1){
+								document.write("<td style=\"width:100px;text-align:center;\">");
+								document.write("<select id=" + ddid2 + " style=\"width:90px;text-align:center;\" onchange=\"setPlayerStatus(this.value,'" + ddid1 + "')\">");
+								for(var i=1;i<=game.gamecount;i++){
+									document.write("<option value=" + i + ((player.gameno==i) ? " selected=\"true\">" : ">") + "REGU " + i + "</option>\n");
+								}
+								document.write("<option value=255" + ((player.gameno==255) ? " selected=\"true\">" : ">") + "RESERVE</option>\n");
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+				</table>
+			</div><br><br>
+
+			<label class="label" style="left:-100px;top:0px;width:200px;cursor:pointer;" title="Click to hide/show Team 2" onclick="toggleView('team2')"><script>document.write(game.team2.noc +"-"+ game.team2.name);</script></label> <br>
+			<div id="team2" style="width:1000px;top:0px;display:block;">
+				<table style="top:0px;left:-100px;"border=0>
+					<tr>
+						<td>NAME OF TEAM</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td style="width:280px;"><script>document.write(game.team2.name);</script></td>
+						<td>COUNTRY</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td style="width:100px;text-align:right;"><script>document.write(game.team2.country);</script></td>
+					</tr>
+					<tr>
+						<td>NOC</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team2.noc);</script></td>
+					</tr>
+					<tr>
+						<td>TEAM MANAGER</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team2.manager);</script></td>
+					</tr>
+					<tr>
+						<td>COACH</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team2.coach);</script></td>
+					</tr>
+					<tr>
+						<td>ASST COACH</td>
+						<td style="width:10px;text-align:center;">:</td>
+						<td colspan="4"><script>document.write(game.team2.asstcoach);</script></td>
+					</tr>
+				</table>
+				<!--label class="label" style="left:-100px;">JERSEY</label>
+				<label class="label" style="left:-100px;width:185px;">NAME</label>
+				<label class="label" style="left:-100px;width:80px;">POSITION</label>
+				<label class="label" style="left:-100px;">HEIGHT(M)</label>
+				<label class="label" style="left:-100px;">DATE OF BIRTH</label>
+				<label class="label" style="left:-100px;width:80px;">STATUS</label>
+				<script>
+					if (game.gamecount>1){
+						document.write("<label class=\"label\" style=\"left:-100px;width:70px;\">REGU</label>");
+					}
+				</script-->
+				<table  id="tblAway" style="top:0px;left:-100px;" border=1>
+					<tr style="color:white;background-color:grey">
+						<th style="width:80px;">JERSEY</th>
+						<th style="width:100px;">NAME</th>
+						<th style="width:70px;">POSITION</th>
+						<th style="width:70px;">HEIGHT(M)</th>
+						<th style="width:50px;">DATE OF BIRTH</th>
+						<th style="width:50px;">STATUS</th>
+						<script>
+							if (game.gamecount>1){
+								document.write("<th style=\"width:50px;\">REGU</th>");
+							}
+						</script>
+					</tr>
+					<script>
+						var player, ps, ddid1,ddid2;
+						for(var i in game.team2.players){
+							player = game.team2.players[i];
+							document.write("<tr>");
+							document.write("\t\t<td  style=\"width:80px; text-align:center;\">" +  player.jersey + "</td>\n");
+							document.write("\t\t<td  style=\"width:200px;\">" + player.name + "</td>\n");
+							document.write("\t\t<td  style=\"width:100px;text-align:center;\">"	 + player.position + "</td>\n");
+							document.write("\t\t<td  style=\"width:100px;text-align:center;\">" + (player.height==null?"":player.height) + "</td>\n");
+							document.write("\t\t<td  style=\"width:140px;text-align:center;\">" + (player.birthdate==null?"":player.birthdate) + "</td>\n");
+							ddid1 = game.team2.idteam + "_" + player.jersey;
+							document.write("<td style=\"width:100px;text-align:center;\">");
+							tmp = "<select id=" + ddid1 + " style=\"width:50px;text-align:center;\"";
+							if (game.gamecount>1){
+								ddid2 = game.team2.idteam + "_GAME_" + player.jersey;
+								tmp += " onchange=\"setGameStatus(this.value,'" + ddid2 + "')\"";
+							}
+							tmp += ">";
+							document.write(tmp);
+							for (var j in game.playerstatus){
+								ps = game.playerstatus[j];
+								document.write("<option value=\"" + ps.id + "\"" + ((ps.id) == (player.status) ? " selected=\"true\">" : ">") + ps.description + "</option>\n");
+							}
+							document.write("</td>");
+
+							// for multiple game event
+							if (game.gamecount>1){
+								document.write("<td style=\"width:100px;text-align:center;\">");
+								document.write("<select id=" + ddid2 + " style=\"width:90px;text-align:center;\" onchange=\"setPlayerStatus(this.value,'" + ddid1 + "')\">");
+								for(var i=1;i<=game.gamecount;i++){
+									document.write("<option value=" + i + ((player.gameno==i) ? " selected=\"true\">" : ">") + "REGU " + i + "</option>\n");
+								}
+								document.write("<option value=255" + ((player.gameno==255) ? " selected=\"true\">" : ">") + "RESERVE</option>\n");
+								document.write("</td>");
+								document.write("</tr>");
+							}
+						}
+					</script>
+				</table>
+			</div>
+			<script>
+				// always the first index upon loading
+				updateOfficials(game,officialSet.value);
+			</script>
+
+
+			<table style="position:relative;margin-left:auto;margin-right:auto;top:50px;">
+				<tr>
+					<script>
+					if (game.finalize==0){
+						document.write("<td>");
+						document.write("<input type=\"submit\" name=\"btnSave\" class=\"btn\" value=\"Save\" onClick=\"saveChanges(game,0)\">");
+						document.write("</td>");
+						document.write("<td>");
+						document.write("<input type=\"submit\" name=\"btnFinal\" class=\"btn\" value=\"Finalize\" onClick=\"saveChanges(game,1)\">");
+						document.write("</td>");
+					}
+					</script>
+				</tr>
+			</table><br>
+			<table style="position:relative;margin-left:auto;margin-right:auto;top:50px;">
+				<tr>
+					<td>
+						<input type="submit" name="btnReg" class="btn" value="Registration" title="Print Start List for Registration" onclick="printGame(0)">
+					</td>
+					<td>
+						<input type="submit" name="btnOfficial" class="btn" value="Official" title="Print Official Start List" onclick="printGame(1)">
+					</td>
+				</tr>
+			</table><br><br><br><br>
+
+
+		</div>
+	</body>
+</html>

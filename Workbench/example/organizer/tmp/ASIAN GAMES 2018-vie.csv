@@ -1,0 +1,19 @@
+Jersey,Name,Position,DateOfBirth,Height,Weight,Passport,NRIC,E-mail,MobileNo,Gender
+1,DAU van Hoang,FEEDER,13/07/1990, , , , , , ,MALE
+2,DO Manh Tuan,FEEDER,30/08/1993, , , , , , ,MALE
+3,le van Nghia,FEEDER,09/01/1993, , , , , , ,MALE
+4,NGUYEN Hoang Lan,FEEDER,25/09/1991, , , , , , ,MALE
+5,NGUYEN Huu Danh,FEEDER,30/07/1991, , , , , , ,MALE
+6,NGUYEN Quoc Anh,FEEDER,02/01/1990, , , , , , ,MALE
+7,BUI Thi Hai Yen,FEEDER,25/01/1996, , , , , , ,FEMALE
+8,DANG Thi My Linh,FEEDER,21/02/1999, , , , , , ,FEMALE
+9,DANG Thi Phuong Thanh,FEEDER,19/10/1997, , , , , , ,FEMALE
+10,DUONG Thi Xuyen,FEEDER,04/03/1994, , , , , , ,FEMALE
+11,GIAP Thi Hien,FEEDER,14/04/1996, , , , , , ,FEMALE
+12,HOANG Thi Hoa,FEEDER,08/08/1996, , , , , , ,FEMALE
+13,NGUYEN Thi My,FEEDER,16/02/1998, , , , , , ,FEMALE
+14,NGUYEN Thi Phuong Trinh,FEEDER,10/12/1997, , , , , , ,FEMALE
+15,NGUYEN Thi Quyen,FEEDER,10/05/1988, , , , , , ,FEMALE
+16,NGUYEN Thi Thu Hanh,FEEDER,05/03/1997, , , , , , ,FEMALE
+17,PHAM Thi Hang,FEEDER,09/11/1995, , , , , , ,FEMALE
+18,TRAN Thi Thu Hoai,FEEDER,24/03/1993, , , , , , ,FEMALE

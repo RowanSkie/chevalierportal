@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/summary.js?filever=<?=filesize('js/summary.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<script type="text/javascript" src="js/tabs.js?filever=<?=filesize('js/tabs.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="css/summary.css?version=<?=filesize('css/summary.css')?>">
+	</head>
+	<body style="font-family:Helvetica;">
+		<div id="header" class="header">
+			<div style="position:absolute;left:15px;top:35px">
+				<img id="leftlogo" width=65 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:555px;top:35px">
+				<img id="rightlogo" width=65 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+
+			<h1 style="font-size:10px;">SEPAKTAKRAW</h1><br>
+			<div style="position:absolute;left:125px">
+				<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;width:400px;" border=0>
+					<tr>
+						<td style="text-align:center;">
+							<label id="lblGender" style="font-size:10px;"></label>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">
+							<label id="lblPhase" style="font-size:10px;top:30px;text-align:left;width:200px;left:285px;"></label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<label id="lblVenue" style="position:absolute; left:85px;top:30px;font-size:10px;width:200px;"></label>
+			<hr style="position:absolute; top:70px; left:0px; width:650px;">
+		</div>
+		<br>
+		<div style="position:relative;top:60px;left:0px;width:650px;">
+			<h1 style="position:absolute;top:0px;">COMPETITION SUMMARY</h1>
+			<h2 style="position:absolute;top:40px;font-size:12px;">As of <script>document.write(new Date().toDateString().toUpperCase() + ", "+ new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1"));</script></h2>
+		</div>
+		<br>
+		<div id="Group A" style="position:relative;top:120px;left:0px;width:650px;display:none;">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP A</label>
+			<table id="tblmatchesGroupA" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupA" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupA" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group B" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP B</label>
+			<table id="tblmatchesGroupB" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupB" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupB" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group C" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP C</label>
+			<table id="tblmatchesGroupC" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupC" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupC" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group D" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP D</label>
+			<table id="tblmatchesGroupD" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupD" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupD" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group E" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP E</label>
+			<table id="tblmatchesGroupE" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupE" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupE" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group F" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP F</label>
+			<table id="tblmatchesGroupF" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupF" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupF" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group G" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP G</label>
+			<table id="tblmatchesGroupG" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupG" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupG" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<div id="Group H" style="position:relative;top:120px;left:0px;width:650px;display:none">
+			<label style="position:absolute; left:15px;top:5px;font-size:10px;">GROUP H</label>
+			<table id="tblmatchesGroupH" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;">DATE</th>
+					<th style="width:50px;">TIME</th>
+					<th style="width:40px;">MATCH NO.</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM A</th>
+					<th style="width:40px;">NOC</th>
+					<th style="width:100px;">TEAM B</th>
+					<th style="width:50px;">SCORE</th>
+					<th id="colmatchesGroupH" style="width:50px;">MATCH SCORE</th>
+					<th style="width:100px;">SET SCORE</th>
+					<th style="width:40px;">DURATION (mins)</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+
+			<br>
+
+			<table id="tblrankingGroupH" cellspacing="0" style="position:relative;margin-left:auto;margin-right:auto;top:20px;font-size:8px;" cellpadding="0" border="1">
+				<tr>
+					<th style="width:50px;" rowspan=2>RANK</th>
+					<th style="width:50px;" rowspan=2>TEAM</th>
+					<th style="width:40px;" colspan=4>MATCHES</th>
+					<th style="width:40px;" colspan=3>SETS</th>
+					<th style="width:100px;" colspan=3>POINTS</th>
+				</tr>
+
+				<tr>
+					<th style="width:30px;">Played</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Points</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+					<th style="width:30px;">Won</th>
+					<th style="width:30px;">Lost</th>
+					<th style="width:30px;">Diff</th>
+				</tr>
+				<!--tr>
+					<td>
+						<table id="tblmatches"  style="position:relative;left:0px; " cellspacing="0" cellpadding="1" border="1">
+						</table>
+					</td>
+				</tr-->
+			</table>
+		</div>
+		<br>
+		<br>
+		<div class="no-print" style="position:relative;width:650px;top:0px;">
+			<hr style="position:relative; top:45px; left:0px; width:650px;">
+			<table style="position:absolute;margin-left:auto;margin-right:auto;top:50px;width:650px;" border=0>
+				<tr>
+					<td style="text-align:center;">
+						<img id="sponsor1logo" width=65 >
+					</td>
+					<td width=100 style="text-align:center;">
+						<label style="max-width:60px;word-wrap: break-word;font-size:12px;left:0px;top:0px;text-align:center;color:gray">STARFISH SYSTEM</label>
+					</td>
+					<td style="text-align:center;">
+						<img id="sponsor2logo" width=65 >
+					</td>
+				</tr>
+			</table>
+
+			<!--div style="position:absolute;left:190px;top:80px">
+				<img id="sponsor1logo" width=150 height=50 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:400px;top:80px">
+				<img id="sponsor2logo" width=150 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<label style="position:absolute;max-width:60px;word-wrap: break-word;font-size:12px;left:300px;top:67px;text-align:center;color:gray">STARFISH SYSTEM</label-->
+			<div style="position:absolute;width:650px;top:120px;">
+				<table style="position:relative;margin-left:auto;margin-right:auto;top:0px;">
+					<tr>
+						<td>
+							<input type="submit" class="btn" value="Print" onclick=printPage()>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="footer">
+			<hr style="position:absolute; bottom:80px; left:0px; width:650px;">
+			<table style="position:absolute;margin-left:auto;margin-right:auto;bottom:25px;width:650px;" border=0>
+				<tr>
+					<td style="text-align:center;">
+						<img id="sponsor1logof" width=65 >
+					</td>
+					<td width=100 style="text-align:center;">
+						<label style="max-width:60px;word-wrap: break-word;font-size:12px;left:0px;top:0px;text-align:center;color:gray">STARFISH SYSTEM</label>
+					</td>
+					<td style="text-align:center;">
+						<img id="sponsor2logof" width=65 >
+					</td>
+				</tr>
+			</table>
+			<!--div style="position:absolute;left:0px;bottom:25px;width:250px;height:75px;" border=1>
+				<img id="sponsor1logof" style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<div style="position:absolute;left:400px;bottom:25px">
+				<img id="sponsor2logof" width=150 style="position:absolute;margin:auto;top:0;left:0;right:0;bottom:0">
+			</div>
+			<label style="position:absolute;max-width:60px; word-wrap: break-word;font-size:12px;left:300px;bottom:10px;text-align:center;color:gray">STARFISH SYSTEM</label-->
+		</div>
+		<script>
+			getGameDetails();
+			displayLogo();
+		</script>
+	</body>
+</html>

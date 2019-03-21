@@ -1,0 +1,84 @@
+body{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0;
+  color: black;
+  font-family:sans-serif;
+}
+
+.title{
+  background-image: url("./../../pic/title.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.main{
+  width: 100%;
+  length: 100%;
+}
+.item33{
+  width: 33.3%;
+  float: left;
+}
+.item20{
+  width: 20%;
+  float: left;
+}
+
+.bannerleft{
+  width: 20%;
+  height: 100%;
+  float: left;
+  background: #ffbebe;
+}
+
+.bannerright{
+  width: 20%;
+  height: 100%;
+  float: left;
+  background: #ff2121;
+}
+
+.item img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.buttonRed{
+  width: 150px;
+  height: 30px;
+  display: block;
+  border-radius: 3px;
+  background: #c32f2d;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  text-decoration: none;
+}
+
+/* anything that starts with . is a class. So .buttonStyle styles class='buttonStyle' */
+/* anything that doesnt have a . is the actual tag! So when we called .item img we were styling the img tag directly*/
+
+/* if you did something like this:
+div{
+  backround: red;
+}
+
+that would give every <div> tag a red background
+*/

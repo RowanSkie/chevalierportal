@@ -1,0 +1,146 @@
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/register.js?filever=<?=filesize('js/register.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js?filever=<?=filesize('js/menu.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="css/register.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/menu.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<title>Organizer Registration</title>
+		<script>
+			$(function() {
+				if (!Modernizr.inputtypes['date']) {
+					$('input[type=date]').datepicker({
+						dateFormat: 'dd-mm-yyyy'
+					});
+				}
+				if (!Modernizr.inputtypes['time']) {
+					$('input[type=time]').timepicker({
+						showAnim: 'blind'
+					});
+				}
+			});
+		</script>
+	</head>
+	<body style="font-family:helvetica;">
+		<ul style="font-family:helvetica;background-color: #333;">
+			<!--li class="icon">
+				<a>&#9776;</a>
+			</li-->
+			<li><a href="index.php">Home</a></li>
+ 		</ul>
+
+		<h1>Register your Organization</h1>
+		<form autocomplete="off"  name="orgReg" method="POST" action="" onsubmit="return register()">
+			<table style="position:relative;margin-left:auto;margin-right:auto; top:150px;font-size:16px" border=0>
+				<tr>
+					<td colspan="3" style="height:50px; font-size:18px;"><b>Your details</b></td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td id="spacer">:</td>
+					<td><input type="email" id="email" placeholder="Email" required></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td id="spacer">:</td>
+					<td><input type="password" id="password" placeholder="Password" required></td>
+				</tr>
+				<tr>
+					<td>Confirm password</td>
+					<td id="spacer">:</td>
+					<td><input type="password" id="confirmpassword" placeholder="Confirm Password" required></td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="name" placeholder="Name" required></td>
+				</tr>
+				<tr>
+					<td>National ID</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="nationalid" placeholder="National ID" required></td>
+				</tr>
+				<tr>
+					<td>Passport No.</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="passport" placeholder="Passport Number" required></td>
+				</tr>
+				<tr>
+					<td>Date of Birth</td>
+					<td id="spacer">:</td>
+					<td><input type="date" id="birthdate" required></td>
+				</tr>
+				<tr>
+					<td>Organization</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="organization" placeholder="Company/Association/Federation" required></td>
+				</tr>
+				<tr>
+					<td>Contact (hp)</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="contactmobile" required></td>
+				</tr>
+				<tr>
+					<td>Contact (office)</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="contactoffice" required></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td id="spacer">:</td>
+					<td><textarea id="address" wrap="soft" required></textarea></td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="state" required></td>
+				</tr>
+				<tr>
+					<script>
+						var noc = JSON.parse(getNocDetails());
+					</script>
+					<td>Country</td>
+					<td id="spacer">:</td>
+					<td>
+					<select id="noc">
+						<option value="" disabled>Select a NOC</option>
+						<script>
+							for (var i in noc){
+								document.write("<option value=" + noc[i].Code + ">" + noc[i].Name + "</option>");
+							}
+						</script>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Postal Code</td>
+					<td id="spacer">:</td>
+					<td><input type="number" id="postalcode" min="0" required></td>
+				</tr>
+
+
+			</table><br><br><br>
+			<table style="position:relative;margin-left:auto;margin-right:auto; top:150px;">
+				<tr>
+					<td>
+						<input type="submit" class="btn" name="btnLogin" value="Register">
+					</td>
+				</tr>
+			</table>
+		</form>
+		<br><br><br>
+	</body>
+</html>

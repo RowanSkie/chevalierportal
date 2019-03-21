@@ -1,0 +1,71 @@
+
+
+<head>
+  <title>Chevalier School</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/home.css">
+  <script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+  <script type="text/javascript" src="js/home.js?filever=<?=filesize('js/home.js')?>"></script>
+  <!-- add the jquery object for the $.ajax function in the js/home.js -->
+  <link rel="stylesheet" type="text/css" href="css/jquery.ui.timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.ui.timepicker.js"></script>
+  <script src="js/jquery-ui.js"></script>
+
+</head>
+
+<body>
+
+
+<table border =1>
+  <tr>
+    <td colspan="3">
+      <div class="title">
+          <center><img src="/../pic/chevalier_school.png"></center>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="width:33%">
+      <div class="item20">
+        <br>
+          Welcome, <script>document.write(getParam("user")+" to Chevalier School Portal.");</script>
+        <br>
+      </div>
+    </td>
+    <td style="width:33%">
+      <table>
+        <tr><td>Student Information</tr>
+        <tr><td>Last Name:</td> <td><script>document.write(getParam("lastname"));</script></td></tr>
+        <tr><td>First Name:</td> <td><script>document.write(getParam("firstname"));</script></td></tr>
+      </table
+    </td style="width:33%">
+    <td>Announcements:</td>
+  </tr>
+  <tr>
+    <td colspan="3"></td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <center>
+          <table id="tblStudentGrades" border=1>
+            <tr>
+              <th style="width=100px">Section</th>
+              <th style="width=200px">Subject</th>
+              <th style="width=100px">Subject</th>
+              <th style="width=50px">Grade</th>
+              <th style="width=200px">Remarks</th>
+            </tr>
+          </table>
+        </center>
+      </td>
+    </tr>
+  </tr>
+</table>
+
+</body>
+<!-- call the function generateSubject()-->
+<script>
+  generateSubject(getParam("id"));
+</script>

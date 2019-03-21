@@ -1,0 +1,287 @@
+
+<html oncontextmenu="return false">
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+		<meta http-equiv="expires" content="timestamp">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="js/global.js?filever=<?=filesize('js/global.js')?>"></script>
+		<script type="text/javascript" src="js/competition.js?filever=<?=filesize('js/option.js')?>"></script>
+		<script type="text/javascript" src="js/menu.js??filever=<?=filesize('js/option.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="css/competition.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/center.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/menu.css?version=1.0">
+		<link rel="stylesheet" type="text/css" href="css/jquery.ui.timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.ui.timepicker.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<title>Organizer</title>
+		<script>
+			$(function() {
+				if (!Modernizr.inputtypes['date']) {
+					$('input[type=date]').datepicker({
+						dateFormat: 'dd-mm-yyyy'
+					});
+				}
+				if (!Modernizr.inputtypes['time']) {
+					$('input[type=time]').timepicker({
+						timeFormat: 'HH:MM'
+					});
+				}
+
+			});
+		</script>
+		<script>
+			var gameType;
+		</script>
+	</head>
+	<body style="font-family:Helvetica;" onload="set_interval()" onmousemove="reset_interval()" onclick="reset_interval()" onkeypress="reset_interval()" onscroll="reset_interval()">
+		<script>
+			retrieveCompetitionList();
+			var noc = getNocDetails();
+			var gameType = getGameType();
+
+		</script>
+		<ul style="font-family:helvetica;background-color: #333;">
+			<!--li class="icon">
+				<a>&#9776;</a>
+			</li-->
+			<li class="dropdown"><a href="main.html" onclick="loadHome()">Home</a>
+				<div class="dropdown-content">
+					<a href="index.php" onclick=logout()>Logout</a>
+				</div>
+			</li>
+		</ul>
+
+		<table style="position:relative; margin-left:auto;margin-right:auto;top:50px;">
+			<tr>
+				<td colspan="2" style="text-align:center;">
+					 <img id="loginImage" src="images/gmsytemlogo.jpg" style="width:100px;height:120px;">
+				</td>
+			</tr>
+		</table>
+		<h1>WELCOME <script>document.write(getParam("user")+"!");</script></h1>
+		<h2>(Group Code: <script>document.write(getParam("groupcode"));</script>)</h2>
+		<!--table style="position:relative;margin-left:auto;margin-right:auto;top:100px;" border=0>
+			<tr>
+				<td>Filter by:</td>
+				<td>
+					<select style="position:relative;font-family:Helvetica;">
+						<option value=0>This year</option>
+						<option value=1>All competitions</option>
+					</select>
+				</td>
+			</tr>
+		</table-->
+		<br>
+		<table id="tblCompetitions" name="tblCompetitions" style="position:relative;margin-left:auto;margin-right:auto;top:50px;" border=1>
+			<tr>
+				<td colspan="6" style="text-align:center;height:50px;font-size:16px;"><b>COMPETITIONS</b></td>
+			</tr>
+			<tr style="color:white;background-color:grey;text-align:center;font-size:16px;height:30px">
+				<th style="width:250px;">TITLE</th>
+				<th style="width:100px;">START DATE</th>
+				<th style="width:100px;">END DATE</th>
+				<th style="width:250px;">COUNTRY</th>
+				<th style="width:250px;">VENUE</th>
+				<th style="width:80px;">MANAGE</th>
+			</tr>
+			<script>
+				var c;
+				for(var i in competitions){
+					c = competitions[i];
+					if (c.ID==null)
+						break;
+					document.write("<tr style=\"text-align:center;font-size:16px;height:30px\">");
+					document.write("<td  style=\"text-align:left; height:20px;cursor:pointer\"><a href=\"event.html#schedule\" onclick=\"loadEvent("+c.ID+",2)\">"  +  c.Title + "</a> </td>\n");
+					document.write("<td  style=\"text-align:center;\">" + c.StartDate + "</td>\n");
+					document.write("<td  style=\"text-align:center;\">" + c.EndDate + "</td>\n");
+					document.write("<td  style=\"text-align:left;\">" + c.Country + "</td>\n");
+					document.write("<td  style=\"text-align:left;\">" + c.Venue + "</td>\n");
+					//document.write("\t\t<td> <input type=\"button\" name=\""+ c.ID +"\" href=\"competition.html\" value=\"Manage\" onclick=\"loadCompetition(1,this.name)\"> </td>\n");
+					document.write("<td> <a class=\"btnManage\"name=\""+ c.ID +"\" href=\"competition.html\" onclick=\"loadCompetition(1,this.name)\">Edit</a> </td>\n");
+					document.write("</tr>");
+				}
+			</script>
+		</table><br><br>
+		<form name="competition" method="POST" action="" onsubmit="return saveCompetition()">
+			<table style="position:relative;margin-left:auto;margin-right:auto;top:100px;font-size:16px;" border=0>
+				<tr>
+					<td colspan="3" style="text-align:center;"><b>Tournament Details</b></td>
+				</tr>
+				<tr>
+					<td colspan="3" style="height:20px;"></td>
+				</tr>
+				<tr>
+					<td>Tournament</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="tournament" placeholder="Name" required></td>
+				</tr>
+				<tr>
+					<td>Venue</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="venue" placeholder="Venue" required></td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td id="spacer">:</td>
+					<td><input type="text" id="state" placeholder="State" required></td>
+				</tr>
+				<tr>
+					<td>Country</td>
+					<td id="spacer">:</td>
+					<td>
+					<select id="noc" required>
+						<option value="" selected>Select a NOC</option>
+						<script>
+							for (var i in noc){
+								document.write("<option value=" + noc[i].Code + ">" + noc[i].Name + "</option>");
+							}
+						</script>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Start Date</td>
+					<td id="spacer">:</td>
+					<td><input type="date" placeholder="Start Date" id="startdate" required></td>
+				</tr>
+				<tr>
+					<td>End Date</td>
+					<td id="spacer">:</td>
+					<td><input type="date" placeholder="End Date"  id="enddate" required></td>
+				</tr>
+				<tr>
+					<td>Type</td>
+					<td id="spacer">:</td>
+					<td>
+						<select id="type" style="font-family:Helvetica" required>
+							<option value="LOCAL">LOCAL</option>
+							<option value="INTERNATIONAL">INTERNATIONAL</option>
+						</select>
+					</td>
+				</tr>
+				<!--tr>
+					<td>No. of Groups</td>
+					<td id="spacer">:</td>
+					<td>
+						<select id="groups" style="font-family:Helvetica" required>
+							<option value=""></option>
+							<option value="2">2 Groups</option>
+							<option value="3">3 Groups</option>
+							<option value="4">4 Groups</option>
+							<option value="5">5 Groups</option>
+							<option value="6">6 Groups</option>
+							<option value="7">7 Groups</option>
+							<option value="8">8 Groups</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>No. of Teams per Group</td>
+					<td id="spacer">:</td>
+					<td>
+						<input type="number" min="2" max="100" id="teamcount" placeholder="No of Teams per Group" required>
+					</td>
+				</tr-->
+				<tr>
+					<td>Max Participants per Team</td>
+					<td id="spacer">:</td>
+					<td>
+						<input type="number" min="1" max="100" id="participants" placeholder="No of Participants per Team" required>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align:center;	">
+						<input type="checkbox" id="sanctioned" onclick=displayWarning(this.checked)>
+						<label for="chkSanction">Sanctioned</label>
+					</td>
+				</tr>
+			</table><br>
+
+			<table  id="tblGameType" style="position:relative; margin-left:auto;margin-right:auto;top:100px;font-size:14px;" border =0>
+				<tr>
+					<th><label class="label"></label>
+					<!--th><label class="label">Playing</label>
+					<th><label class="label">Reserved</label-->
+					<th><label class="label">EVENT</label>
+					<th><label class="label">MEN</label>
+					<th><label class="label">WOMEN</label>
+					<th><label class="label">NO. OF GROUPS</label>
+					<th><label class="label">TEAM PER GROUP</label>
+				</tr>
+				<tr>
+				<script>
+					var gt;
+					var mode = getParam("mode");
+					for(var i in gameType){
+						gt = gameType[i];
+						isBeach = gt.description.indexOf("BEACH");
+						document.write("<tr>");
+						document.write("\t\t<td  style=\"width:150px; text-align:left;\">" +  gt.description + "</td>\n");
+						//document.write("\t\t<td  style=\"width:50px;text-align:center;\">" + gt.playing + "</td>\n");
+						//document.write("\t\t<td  style=\"width:50px;text-align:center;\">" + gt.reserved + "</td>\n");
+						document.write("\t\t<td  style=\"width:50px;text-align:center;\">");
+						document.write("<input type=\"checkbox\" name=\"" + gt.id + (isBeach==-1?"\" checked":"\"") +">\n");
+						document.write("</td>\n");
+						document.write("\t\t<td  style=\"width:50px;text-align:center;\">");
+						document.write("<input type=\"checkbox\" name=\"" + gt.id + "_M" + (isBeach==-1?"\" checked":"\"") + ">\n");
+						document.write("</td>\n");
+						document.write("\t\t<td  style=\"width:50px;text-align:center;\">");
+						document.write("<input type=\"checkbox\" name=\"" + gt.id + "_W"+ (isBeach==-1?"\" checked":"\"") + ">\n");
+						document.write("</td>\n");
+						document.write("<td>\n");
+						document.write("<select style=\"width:120px;text-align:center;font-family:Helvetica\">\n");
+						document.write("<option value=\"\"></option>\n");
+						document.write("<option value=\"1\">1 Group</option>\n");
+						document.write("<option value=\"2\">2 Groups</option>\n");
+						document.write("<option value=\"3\">3 Groups</option>\n");
+						document.write("<option value=\"4\">4 Groups</option>\n");
+						document.write("<option value=\"5\">5 Groups</option>\n");
+						document.write("<option value=\"6\">6 Groups</option>\n");
+						document.write("<option value=\"7\">7 Groups</option>\n");
+						document.write("<option value=\"8\">8 Groups</option>\n");
+						document.write("</select>\n");
+						document.write("</td>\n");
+						document.write("<td>\n");
+						document.write("<input type=\"number\" min=\"2\" max=\"100\" style=\"width:150px;text-align:center;\">\n");
+						document.write("</td>\n");
+					}
+				</script>
+				</tr>
+			</table>
+			<br><br>
+			<table id="tblCreate" style="position:relative;margin-left:auto;margin-right:auto;top:100px;">
+				<tr>
+					<td>
+						<input class="btn" type="submit" name="btnSave" value="Save">
+						<input class="btn" type="button" name="btnCancel" onclick="window.history.back()" value="Cancel">
+					</td>
+				</tr>
+			</table>
+			<table id="tblManage" style="position:relative;margin-left:auto;margin-right:auto;top:100px;">
+				<tr>
+					<td>
+						<input class="btn" type="submit" name="btnSave" value="Update">
+						<input class="btn" type="button" name="btnRemove" value="Remove" onclick="removeCompetition(getParam('modeID'))">
+						<input class="btn" type="button" name="btnCancel" value="Cancel" onclick="window.history.back()">
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script>
+			if(getParam("mode")==0){
+				document.getElementById("tblManage").style.display="none";
+			}else{
+				document.getElementById("tblCreate").style.display="none";
+				populateForm();
+			}
+		</script>
+		<br><br><br>
+	</body>
+</html>

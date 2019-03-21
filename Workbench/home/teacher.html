@@ -1,0 +1,84 @@
+<head>
+  <title>Chevalier School</title>
+  <link rel="stylesheet" type="text/css" href="/../css/style.css">
+  <link rel="stylesheet" type="text/css" href="/../css/home.css">
+  <script type="text/javascript" src="/../js/global.js?filever=<?=filesize('/../js/global.js')?>"></script>
+  <script type="text/javascript" src="/../js/teacher.js?filever=<?=filesize('/../js/teacher.js')?>"></script>
+  <link rel="stylesheet" type="text/css" href="/../css/jquery.ui.timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="/../css/jquery-ui.css">
+  <script src="/../js/jquery.js"></script>
+  <script src="/../js/jquery.ui.timepicker.js"></script>
+  <script src="/../js/jquery-ui.js"></script>
+</head>
+
+<body>
+    <div class="title">
+        <center><img src="/../pic/chevalier_school.png"></center>
+    </div>
+    <div class="main">
+      <div class="bannerleft"><!--- column one for color probably peach --->
+        <center><br><br><br>
+          <a href="teacher.html" class="ButtonRed">Home</a><br>
+          <a href="announce.html" class="ButtonRed">Announcements</a><br>
+          <a href="/../index.html" class="ButtonRed">Log Out</a>
+        </center>
+      </div>
+      <div class="homeapp"><!-- middle column-->
+      <center>
+        <font size=5>Welcome Mr./Ms. <script>document.write(getParam("firstname") + " " +getParam("lastname"));</script></font>
+      <br>
+      <br>
+        <table id="tblStudentGrades" border=1>
+          <tr>
+            <th>Manage</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Section</th>
+            <th>Grade</th>
+          </tr>
+        </table>
+      <br>
+      </center>
+        <!-- placerhoder for records to be edited-->
+        <div id="StudentAccount" style="display:none"><form autocomplete="off" name="formEditGrade" onsubmit="return saveStudentGrade()">
+          <center><table">
+            <tr>
+              <td>Last Name</td>
+              <br>
+              <td><input type="text" id="studentLastName" placeholder="Last Name" readonly style="width:250px;font-size:14px;" readonly="readonly"></td>
+            </tr>
+            <br>
+            <tr>
+              <td>First Name</td>
+              <br>
+              <td><input type="text" id="studentFirstName" placeholder="First Name" readonly style="width:250px;font-size:14px;" readonly="readonly"></td>
+            </tr>
+            <br>
+            <tr>
+              <td>Section</td>
+              <br>
+              <td><input type="text" id="studentSection" placeholder="Section" readonly style="width:250px;font-size:14px;" readonly="readonly"></td>
+            </tr>
+            <br>
+            <tr>
+              <td>Grade</td>
+              <br>
+              <td><input type="text" id="studentGrade" placeholder="Grade" readonly style="width:250px;font-size:14px;"></td>
+            </tr>
+            <br>
+            <tr>
+              <td>
+                <input type="button" name="btnCancel" value="Close" onclick="clearStudentInfo()">
+              </td>
+            </tr>
+            </table></center></div>
+      </div>
+      <div class="bannerright"><!--- column five for color probably peach --->
+        <br>
+      </div>
+    </div>
+</body>
+<script>
+   // display the students under the teacher for editing grades
+   getMyStudents(getParam("id"));
+</script>
